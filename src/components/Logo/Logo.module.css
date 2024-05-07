@@ -1,0 +1,19 @@
+.logo {
+  cursor: pointer;
+  font-size: 24px;
+  font-weight: 600;
+  left: 24px;
+  top: 24px;
+  position: absolute;
+  text-align: center;
+  text-decoration: none;
+}
+
+.center {
+  display: flex;
+  align-items: center;
+}
+
+.image {
+  margin-right: 12px;
+}

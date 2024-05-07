@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { MantineProvider } from '@mantine/core';
 import { theme } from '../../theme';
+import { Logo } from '@/components/Logo/Logo';
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,7 +22,7 @@ export default function RootLayout({ children }: { children: any }) {
         />
       </head>
       <body className={inter.className}>
-        <MantineProvider theme={theme}>{children}</MantineProvider>
+        <MantineProvider theme={theme}><Logo/>{children}</MantineProvider>
       </body>
     </html>
   );
