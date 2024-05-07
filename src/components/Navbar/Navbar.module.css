@@ -1,0 +1,22 @@
+.navbar {
+  width: 280px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  margin: 24px;
+}
+
+.link {
+  text-decoration: none;
+  font-size: 16px;
+  color: var(--mantine-color-grey-0);
+  padding: 10px;
+  &:hover {
+    color: var(--mantine-color-purple-2);
+  }
+}
