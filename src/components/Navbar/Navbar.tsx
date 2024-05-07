@@ -26,6 +26,7 @@ const Navbar = () => {
       <span>{item.label}</span>
     </a>
   ));
+
   return (
     <Flex className={classes.navbar} bg="purple.5">
       <Logo />

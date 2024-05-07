@@ -19,4 +19,13 @@
   &:hover {
     color: var(--mantine-color-purple-2);
   }
+  &[data-active] {
+    &,
+    &:hover {
+      border-radius: 8px;
+      background-color: var(--mantine-color-purple-4);
+      font-weight: 600;
+      color: var(--mantine-color-purple-1);
+    }
+  }
 }
