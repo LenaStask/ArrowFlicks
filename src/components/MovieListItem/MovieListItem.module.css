@@ -1,0 +1,62 @@
+.card {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  height: 218px;
+  width: 482px;
+  background-color: var(--mantine-color-grey-6);
+  border-radius: 12px;
+  padding: 24px; 
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 250px;
+}
+.title {
+  color: var(--mantine-color-purple-1);
+  font-size: 20px;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+}
+
+.year {
+  color: var(--mantine-color-grey-1);
+  font-size: 16px;
+  margin: 0 0 8px 0;
+}
+
+.vote {
+ display: flex;
+ flex-direction: row;
+ align-items: center;
+ gap: 4px;
+ height: 28px;
+}
+
+.average{
+  color: var(--mantine-color-grey-0);
+  font-size: 16px;
+}
+
+.count {
+  color: var(--mantine-color-grey-1);
+  font-size: 16px;
+}
+
+.genres {
+  margin: 0;
+  color: var(--mantine-color-grey-1);
+  & span {
+    color: var(--mantine-color-grey-0);
+  }
+}
+
+.iconStar {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
