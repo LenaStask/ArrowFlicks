@@ -1,6 +1,6 @@
 .navbar {
-  width: 280px;
-  height: 100vh;
+  min-width: 280px;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
