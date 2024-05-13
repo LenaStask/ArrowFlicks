@@ -1,17 +1,14 @@
 .logo {
   cursor: pointer;
-  font-size: 24px;
-  font-weight: 600;
-  left: 24px;
-  top: 24px;
-  position: absolute;
+  padding-top: 24px;
+  padding-left: 24px;
   text-align: center;
   text-decoration: none;
+  margin-bottom: 80px;
 }
 
 .center {
-  display: flex;
-  align-items: center;
+  justify-content: flex-start;
 }
 
 .image {
