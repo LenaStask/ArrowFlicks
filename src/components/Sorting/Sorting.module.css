@@ -1,0 +1,43 @@
+.root {
+  align-self: flex-end;
+  margin-bottom: 24px;
+}
+.label {
+  color: var(--mantine-color-grey-0);
+  font-size: 16px; 
+  font-weight: 600;
+}
+
+.input {
+  border-radius: 8px;
+  border: 1px solid var(--mantine-color-grey-3);
+  width: 284px;
+  height: 42px;
+  &:hover {
+    border: 1px solid var(--mantine-color-purple-1);
+  }
+  &[data-expanded] {
+    border: 1px solid var(--mantine-color-purple-1);
+  }
+}
+
+
+.selectIcon {
+  color: var(--mantine-color-grey-3);
+}
+
+.dropdown {
+  border-radius: 8px;
+}
+.option {
+  &:hover {
+    border-radius: 8px;
+    background-color: var(--mantine-color-purple-1);
+    color: var(--mantine-color-grey-7);
+  }
+}
+
+.mantine-Select-option {
+  background-color: lightblue; /* Change background color for active option */
+  color: white; /* Change text color for active option */
+}
