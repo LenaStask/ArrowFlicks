@@ -1,8 +1,8 @@
-import IMovie from "./IMovie";
+import IMovieListItem from "./IMovieListItem";
 
 export default interface IMovieResponse {
   page: number;
-  results: IMovie[];
+  results: IMovieListItem[];
   total_pages: number;
   total_results: number;
 }
