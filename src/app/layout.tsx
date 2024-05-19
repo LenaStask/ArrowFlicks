@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { Flex, MantineProvider } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { theme } from "../../theme";
-import { Navbar } from "@/components/Navbar/Navbar";
-import "./global.css";
-
-const inter = Inter({ subsets: ["latin"] });
+import "@mantine/core/styles.css";
+import "./layout.css";
 
 export const metadata: Metadata = {
   title: "Arrow Flicks",
@@ -22,12 +19,9 @@ export default function RootLayout({ children }: { children: any }) {
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
         />
       </head>
-      <body className={inter.className}>
+      <body>
         <MantineProvider theme={theme}>
-          <Flex className="container">
-            <Navbar />
-            <main>{children}</main>
-          </Flex>
+          {children}
         </MantineProvider>
       </body>
     </html>
