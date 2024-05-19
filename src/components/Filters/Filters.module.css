@@ -1,0 +1,46 @@
+.container {
+  flex-direction: row;
+}
+
+.label {
+  color: var(--mantine-color-grey-0);
+  font-size: 16px; 
+  font-weight: 600;
+}
+
+.input {
+  border-radius: 8px;
+  border: 1px solid var(--mantine-color-grey-3);
+  width: 284px;
+  min-height: 42px;
+  &:hover {
+    border: 1px solid var(--mantine-color-purple-1);
+  }
+  &[data-expanded] {
+    border: 1px solid var(--mantine-color-purple-1);
+  }
+}
+
+.inputField {
+  display: none;
+}
+.pillsList {
+  & button {
+   display: none;
+  }
+}
+.pill {
+  background-color: transparent;
+  font-size: 14px;
+}
+
+.dropdown {
+  border-radius: 8px;
+}
+.option {
+  &:hover {
+    border-radius: 8px;
+    background-color: var(--mantine-color-purple-1);
+    color: var(--mantine-color-grey-7);
+  }
+}
