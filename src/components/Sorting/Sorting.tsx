@@ -26,7 +26,6 @@ const Sorting = ({onChange}:ChildProps) => {
           className={classes.selectIcon}
         />
       }
-      placeholder="Pick value"
       data={[
         { value: "popularity.desc", label: "Most Popular" },
         { value: "popularity.asc", label: "Least Popular" },
