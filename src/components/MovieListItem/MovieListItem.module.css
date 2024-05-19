@@ -1,8 +1,7 @@
 .card {
   flex-direction: row;
   gap: 16px;
-  height: 218px;
-  width: 482px;
+  max-width: 482px;
   background-color: var(--mantine-color-grey-6);
   border-radius: 12px;
   padding: 24px; 
@@ -16,7 +15,6 @@
 }
 .title {
   color: var(--mantine-color-purple-1);
-  font-size: 20px;
   font-weight: 600;
   margin: 0 0 8px 0;
 }
@@ -28,11 +26,11 @@
 }
 
 .vote {
- display: flex;
- flex-direction: row;
- align-items: center;
- gap: 4px;
- height: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
 }
 
 .average{
