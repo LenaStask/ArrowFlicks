@@ -1,20 +1,18 @@
 import NextImage from "next/image";
-import { Card, Image, Text, Group, Flex } from "@mantine/core";
+import { Card, Image, Text, Group, Flex, Title } from "@mantine/core";
 import classes from "./Movie.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
-import IMovie from "@/app/interfaces/IMovie";
 import no_poster from "../../assets/no_poster.svg";
+import IMovie from '@/app/interfaces/IMovie';
 
-
-const convertDate = (date: string):string => {
+const convertDate = (date: string): string => {
   const newDate = new Date(date);
-  const month = newDate.toLocaleString('en-US',{month: 'long'});
+  const month = newDate.toLocaleString("en-US", { month: "long" });
   const day = newDate.getDate();
   const year = newDate.getFullYear();
 
   return `${month} ${day}, ${year}`;
-  
-}
+};
 const Movie = ({ movie }: { movie: IMovie }) => {
   return (
     <Card className={classes.card}>
@@ -39,7 +37,7 @@ const Movie = ({ movie }: { movie: IMovie }) => {
       )}
       <Flex className={classes.header}>
         <Flex direction="column">
-          <Text className={classes.title}>{movie.title}</Text>
+          <Title order={2} className={classes.title}>{movie.title}</Title>
           <Text className={classes.year}>{movie.release_date}</Text>
           <Group className={classes.vote}>
             <IconStarFilled color="#FAB005" />
@@ -51,15 +49,17 @@ const Movie = ({ movie }: { movie: IMovie }) => {
         </Flex>
         <Group className={classes.info}>
           <Text className={classes.genres}>
-            <div className={classes.label}>Duration</div> 
-            <span>{`${Math.trunc(movie.runtime/60)}h ${movie.runtime-Math.trunc(movie.runtime/60)*60}min`}</span>
+            <div className={classes.label}>Duration</div>
+            <span>{`${Math.trunc(movie.runtime / 60)}h ${
+              movie.runtime - Math.trunc(movie.runtime / 60) * 60
+            }min`}</span>
           </Text>
           <Text className={classes.genres}>
             <div className={classes.label}>Premiere</div>
             <span>{convertDate(movie.release_date)}</span>
           </Text>
           <Text className={classes.genres}>
-            <div className={classes.label}>Gross worldwide  </div>
+            <div className={classes.label}>Gross worldwide </div>
             <span>${movie.revenue.toLocaleString()}</span>
           </Text>
           <Text className={classes.genres}>
@@ -68,7 +68,7 @@ const Movie = ({ movie }: { movie: IMovie }) => {
           </Text>
           <Text className={classes.genres}>
             <div className={classes.label}>Genres</div>
-            <span>{movie.genres.map((item) => item.name).join(', ')}</span>
+            <span>{movie.genres.map((item) => item.name).join(", ")}</span>
           </Text>
         </Group>
       </Flex>
