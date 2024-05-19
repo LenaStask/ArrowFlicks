@@ -1,0 +1,44 @@
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background-color: var(--mantine-color-grey-4);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+.container {
+  margin: 0 10px;
+  display: flex;
+  flex-direction: row;
+  @media (max-width: 1200px) {
+    flex-direction: column;
+  }
+}
+
+main {
+  display: flex;
+  min-height: 100vh;
+  padding-top: 40px;
+  justify-content: center;
+  flex-grow: 1;
+}
