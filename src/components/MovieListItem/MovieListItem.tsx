@@ -3,13 +3,13 @@ import { Card, Image, Text, Group, Flex, Title } from "@mantine/core";
 import classes from "./MovieListItem.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
-import { getGenresList } from "@/api/tmdb";
 import no_poster from "../../assets/no_poster.svg";
-import IMovie from '@/app/interfaces/IMovie';
+import { getGenres } from "@/api/tmdb/TmdbApi";
+import { MovieListItem as IMovieListItem } from "@/api/tmdb/types";
 
-const MovieListItem = ({ movie }: { movie: IMovie }) => {
+const MovieListItem = ({ movie }: { movie: IMovieListItem }) => {
   const { data, isSuccess } = useQuery({
-    queryFn: () => getGenresList(),
+    queryFn: () => getGenres(),
     queryKey: ["genres"],
   });
 
@@ -36,7 +36,9 @@ const MovieListItem = ({ movie }: { movie: IMovie }) => {
       )}
       <Flex className={classes.info}>
         <Flex direction="column">
-          <Title className={classes.title} order={2}>{movie.title}</Title>
+          <Title className={classes.title} order={2}>
+            {movie.title}
+          </Title>
           <Text className={classes.year}>{movie.release_date.slice(0, 4)}</Text>
           <Group className={classes.vote}>
             <IconStarFilled color="#FAB005" />

@@ -3,7 +3,7 @@ import { Card, Image, Text, Group, Flex, Title } from "@mantine/core";
 import classes from "./Movie.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
 import no_poster from "../../assets/no_poster.svg";
-import IMovie from '@/app/interfaces/IMovie';
+import { Movie as IMovie } from "@/api/tmdb/types";
 
 const convertDate = (date: string): string => {
   const newDate = new Date(date);
@@ -37,7 +37,9 @@ const Movie = ({ movie }: { movie: IMovie }) => {
       )}
       <Flex className={classes.header}>
         <Flex direction="column">
-          <Title order={2} className={classes.title}>{movie.title}</Title>
+          <Title order={2} className={classes.title}>
+            {movie.title}
+          </Title>
           <Text className={classes.year}>{movie.release_date}</Text>
           <Group className={classes.vote}>
             <IconStarFilled color="#FAB005" />

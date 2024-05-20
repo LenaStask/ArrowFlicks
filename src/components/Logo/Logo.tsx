@@ -1,5 +1,5 @@
 import NextImage from "next/image";
-import { Box, Center, Image, Text, Title } from "@mantine/core";
+import { Box, Center, Image, Title } from "@mantine/core";
 import icon from "../../../public/icon.svg";
 import { Poppins } from "next/font/google";
 import classes from "./Logo.module.css";

@@ -1,11 +1,11 @@
 "use client";
 
 import { useQuery } from "@tanstack/react-query";
-import { getMovie } from "../../../../api/tmdb";
+import { getMovie } from "../../../../api/tmdb/TmdbApi";
 import Movie from "@/components/Movie/Movie";
 import Trailer from "@/components/Trailer/Trailer";
 import classes from "./page.module.css";
-import { Text } from '@mantine/core';
+import { Text } from "@mantine/core";
 
 export default function MovieDetails({
   params,

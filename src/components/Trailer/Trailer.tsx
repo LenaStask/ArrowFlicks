@@ -1,14 +1,14 @@
 import { Card, Group, Title, Text, Image } from "@mantine/core";
 import classes from "./Trailer.module.css";
 import { useQuery } from "@tanstack/react-query";
-import { getVideos } from "@/api/tmdb";
-import IMovie from "@/app/interfaces/IMovie";
-import no_logo from "../../assets/no_logo.png";
+import no_logo from "../../assets/no_logo.svg";
+import { Movie } from "@/api/tmdb/types";
+import { getVideos } from "@/api/tmdb/TmdbApi";
 
-const Trailer = ({ movie }: { movie: IMovie }) => {
+const Trailer = ({ movie }: { movie: Movie }) => {
   const { data, isSuccess } = useQuery({
     queryFn: () => getVideos(movie.id),
-    queryKey: ["vedios", movie.id],
+    queryKey: ["videos", movie.id],
   });
 
   const items = movie.production_companies.map((item) => (
