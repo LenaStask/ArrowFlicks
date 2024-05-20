@@ -4,6 +4,7 @@ import classes from "./Movie.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
 import no_poster from "../../assets/no_poster.svg";
 import { Movie as IMovie } from "@/api/tmdb/types";
+import Rating from '../Rating/Rating';
 
 const convertDate = (date: string): string => {
   const newDate = new Date(date);
@@ -13,6 +14,7 @@ const convertDate = (date: string): string => {
 
   return `${month} ${day}, ${year}`;
 };
+
 const Movie = ({ movie }: { movie: IMovie }) => {
   return (
     <Card className={classes.card}>
@@ -74,10 +76,7 @@ const Movie = ({ movie }: { movie: IMovie }) => {
           </Text>
         </Group>
       </Flex>
-      <Flex className={classes.iconStar}>
-        <IconStarFilled color="var(--mantine-color-grey-3)" />
-        <span>9</span>
-      </Flex>
+        <Rating movie={{id: movie.id, title: movie.title}}/>
     </Card>
   );
 };

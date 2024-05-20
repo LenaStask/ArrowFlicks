@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import no_poster from "../../assets/no_poster.svg";
 import { getGenres } from "@/api/tmdb/TmdbApi";
 import { MovieListItem as IMovieListItem } from "@/api/tmdb/types";
+import Rating from "../Rating/Rating";
 
 const MovieListItem = ({ movie }: { movie: IMovieListItem }) => {
   const { data, isSuccess } = useQuery({
@@ -36,7 +37,7 @@ const MovieListItem = ({ movie }: { movie: IMovieListItem }) => {
       )}
       <Flex className={classes.info}>
         <Flex direction="column">
-          <Title className={classes.title} order={2}>
+          <Title className={classes.cardTitle} order={2}>
             {movie.title}
           </Title>
           <Text className={classes.year}>{movie.release_date.slice(0, 4)}</Text>
@@ -63,10 +64,7 @@ const MovieListItem = ({ movie }: { movie: IMovieListItem }) => {
           </span>
         </Text>
       </Flex>
-      <Flex className={classes.iconStar}>
-        <IconStarFilled color="var(--mantine-color-grey-3)" />
-        <span>9</span>
-      </Flex>
+      <Rating movie={{ id: movie.id, title: movie.title }} />
     </Card>
   );
 };

@@ -1,0 +1,50 @@
+.iconStar {
+  height: 28px;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.modal {
+  max-width: 380px;
+  max-height: 208px;
+  padding: 16px;
+  border-radius: 8px;
+  & .title {
+    color: black;
+  }
+}
+
+.content {
+  border-radius: 8px;
+}
+
+.header {
+  font-weight: 200;
+  border-bottom: 1px solid var(--mantine-color-grey-3);
+}
+
+.close {
+  color: var(--mantine-color-grey-2);
+}
+
+.modalTitle{
+  margin-top: 16px;
+  font-weight: 700;
+}
+
+.fillButton {
+  background-color: var(--mantine-color-purple-1);
+  border-radius: 8px;
+  &:hover {
+    background-color: var(--mantine-color-purple-2);
+  }
+}
+
+.transporentButton {
+  color: var(--mantine-color-purple-1);
+  &:hover {
+    color: var(--mantine-color-purple-2);
+  }
+}
