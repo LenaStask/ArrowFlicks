@@ -2,18 +2,11 @@ import NextImage from "next/image";
 import { Card, Image, Text, Group, Flex, Title } from "@mantine/core";
 import classes from "./MovieListItem.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
-import { useQuery } from "@tanstack/react-query";
 import no_poster from "../../assets/no_poster.svg";
-import { getGenres } from "@/api/tmdb/TmdbApi";
-import { MovieListItem as IMovieListItem } from "@/api/tmdb/types";
 import Rating from "../Rating/Rating";
+import MovieInfo from "@/types/MovieInfo";
 
-const MovieListItem = ({ movie }: { movie: IMovieListItem }) => {
-  const { data, isSuccess } = useQuery({
-    queryFn: () => getGenres(),
-    queryKey: ["genres"],
-  });
-
+const MovieListItem = ({ movie }: { movie: MovieInfo }) => {
   return (
     <Card className={classes.card} component="a" href={`/movie/${movie.id}`}>
       {movie.poster_path === null ? (
@@ -36,9 +29,9 @@ const MovieListItem = ({ movie }: { movie: IMovieListItem }) => {
         />
       )}
       <Flex className={classes.info}>
-        <Flex direction="column">
+        <Flex direction="column" className={classes.infoSection}>
           <Title className={classes.cardTitle} order={2}>
-            {movie.title}
+            {movie.original_title}
           </Title>
           <Text className={classes.year}>{movie.release_date.slice(0, 4)}</Text>
           <Group className={classes.vote}>
@@ -51,20 +44,10 @@ const MovieListItem = ({ movie }: { movie: IMovieListItem }) => {
         </Flex>
         <Text className={classes.genres}>
           Genres{" "}
-          <span>
-            {isSuccess &&
-              data.genres
-                .reduce((res: string[], item) => {
-                  if (movie.genre_ids.includes(item.id)) {
-                    res.push(item.name);
-                  }
-                  return res;
-                }, [])
-                .join(", ")}
-          </span>
+          <span>{movie.genres.map((genre) => genre.name).join(", ")}</span>
         </Text>
       </Flex>
-      <Rating movie={{ id: movie.id, title: movie.title }} />
+      <Rating movie={{ id: movie.id, title: movie.original_title }} />
     </Card>
   );
 };

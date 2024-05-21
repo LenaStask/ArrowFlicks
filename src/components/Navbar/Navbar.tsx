@@ -7,8 +7,8 @@ import { useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
 
 const data = [
-  { link: "", label: "Movies" },
-  { link: "", label: "Rated movies" },
+  { link: "/", label: "Movies" },
+  { link: "/ratedMovies", label: "Rated movies" },
 ];
 
 const Navbar = () => {

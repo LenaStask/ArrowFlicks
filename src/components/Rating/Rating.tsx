@@ -8,21 +8,20 @@ import {
 } from "@mantine/core";
 import classes from "./Rating.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
-import MovieShortInfo from "@/app/types/MovieShortInfo";
+import MovieShortInfo from "@/types/MovieShortInfo";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import {
   getRatedMovie,
-  getRatedMovies,
   removeRatedMovie,
   setRatedMovie,
-} from "@/app/store/localStorage";
+} from "@/store/localStorage";
 
 const Rating = ({ movie }: { movie: MovieShortInfo }) => {
-  const [opened, { open, close }] = useDisclosure(false);
-  const [value, setValue] = useState(getRatedMovie(movie.id));
+  const ratedMovie = getRatedMovie(movie.id);
 
-  const ratedMovies = getRatedMovies();
+  const [opened, { open, close }] = useDisclosure(false);
+  const [value, setValue] = useState(ratedMovie ? ratedMovie.rating : 0);
 
   return (
     <Flex className={classes.iconStar}>
@@ -65,7 +64,7 @@ const Rating = ({ movie }: { movie: MovieShortInfo }) => {
           </Group>
         </Flex>
       </Modal>
-      {ratedMovies[movie.id] ? (
+      {value !== 0 ? (
         <>
           <IconStarFilled
             color="var(--mantine-color-purple-1)"
@@ -74,7 +73,7 @@ const Rating = ({ movie }: { movie: MovieShortInfo }) => {
               open();
             }}
           />
-          <span>{getRatedMovie(movie.id)}</span>
+          <span>{value}</span>
         </>
       ) : (
         <>

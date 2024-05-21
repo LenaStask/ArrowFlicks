@@ -1,9 +1,10 @@
 import { Container } from "@mantine/core";
 import classes from "./MovieList.module.css";
 import MovieListItem from "../MovieListItem/MovieListItem";
-import { MovieListItem as IMovieListItem } from "@/api/tmdb/types";
+import { MovieListItem as IMovieListItem, Movie } from "@/api/tmdb/types";
+import MovieInfo from '@/types/MovieInfo';
 
-const MovieList = ({ movies }: { movies: IMovieListItem[] }) => {
+const MovieList = ({ movies }: { movies: MovieInfo[] }) => {
   const children = movies.map(
     (movie): React.ReactNode => <MovieListItem key={movie.id} movie={movie} />
   );

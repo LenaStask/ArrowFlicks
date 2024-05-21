@@ -1,6 +1,6 @@
 "use client";
 
-import { getMovies } from "../../api/tmdb/TmdbApi";
+import { getGenres, getMovies } from "../../api/tmdb/TmdbApi";
 import MovieList from "@/components/MovieList/MovieList";
 import { Pagination } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
@@ -8,6 +8,7 @@ import { useState } from "react";
 import classes from "./page.module.css";
 import Sorting from "@/components/Sorting/Sorting";
 import Filters from "@/components/Filters/Filters";
+import convertToMovieInfo from "@/helpers/convertToMovieInfo";
 
 const MAX_TOTAL_PAGES = 500;
 
@@ -24,6 +25,11 @@ export default function Home() {
     year: 0,
   });
 
+  const genresQuery = useQuery({
+    queryFn: () => getGenres(),
+    queryKey: ["genres"],
+  });
+
   const { data, isLoading, isSuccess } = useQuery({
     queryFn: () => getMovies(activePage, sorting),
     queryKey: ["movies", activePage, sorting],
@@ -32,16 +38,19 @@ export default function Home() {
   const handleSortingChange = (value: string) => {
     setSorting(value);
   };
+
   const handFiltersChange = (value: IFilters) => {
     setFilters(value);
   };
 
-  if (isSuccess) {
+  if (genresQuery.isSuccess && isSuccess) {
     return (
       <div className={classes.container}>
         <Filters onChange={handFiltersChange} />
         <Sorting onChange={handleSortingChange} />
-        <MovieList movies={data.results} />
+        <MovieList
+          movies={convertToMovieInfo(data.results, genresQuery.data.genres)}
+        />
         <Pagination
           classNames={classes}
           value={activePage}

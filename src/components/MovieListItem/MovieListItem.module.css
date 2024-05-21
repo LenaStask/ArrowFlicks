@@ -13,6 +13,9 @@
   justify-content: space-between;
   width: 250px;
 }
+.infoSection {
+  margin-bottom: 62px ;
+}
 .cardTitle {
   color: var(--mantine-color-purple-1);
   font-weight: 600;
