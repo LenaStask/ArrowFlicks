@@ -1,0 +1,14 @@
+.root {
+  width: 490px;
+}
+.input {
+  height: 48px;
+  border-radius: 8px;
+  border: 1px solid var(--mantine-color-grey-3);
+  &:hover {
+    border: 1px solid var(--mantine-color-purple-1);
+  }
+}
+.section[data-position='right'] {
+  width: 100px;
+}

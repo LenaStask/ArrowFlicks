@@ -1,8 +1,8 @@
-.root{
-  align-self: flex-end;
+.root {
+  margin: 0 auto;
 }
 
-.dots{
+.dots {
   display: none;
 }
 
@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
 }
-.group{
+.group {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -25,4 +25,5 @@
 
 .search {
   justify-content: space-between;
+  margin-bottom: 40px;
 }

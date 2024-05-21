@@ -21,7 +21,6 @@
   }
 }
 
-
 .selectIcon {
   color: var(--mantine-color-grey-3);
 }
@@ -29,15 +28,11 @@
 .dropdown {
   border-radius: 8px;
 }
+
 .option {
   &:hover {
     border-radius: 8px;
     background-color: var(--mantine-color-purple-1);
     color: var(--mantine-color-grey-7);
   }
-}
-
-.mantine-Select-option {
-  background-color: lightblue; /* Change background color for active option */
-  color: white; /* Change text color for active option */
 }
