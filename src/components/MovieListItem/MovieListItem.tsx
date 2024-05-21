@@ -47,7 +47,7 @@ const MovieListItem = ({ movie }: { movie: MovieInfo }) => {
           <span>{movie.genres.map((genre) => genre.name).join(", ")}</span>
         </Text>
       </Flex>
-      <Rating movie={{ id: movie.id, title: movie.original_title }} />
+      <Rating movie={movie} />
     </Card>
   );
 };

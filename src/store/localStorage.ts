@@ -1,4 +1,5 @@
-import RatedMovie from '@/types/RatedMovie';
+import MovieInfo from "@/types/MovieInfo";
+import RatedMovie from "@/types/RatedMovie";
 
 const getRatedMovies = (): RatedMovie[] => {
   const item = localStorage.getItem("ratedMovies");
@@ -8,14 +9,14 @@ const getRatedMovies = (): RatedMovie[] => {
 
 const getRatedMovie = (id: number): RatedMovie | null => {
   const ratedMovies = getRatedMovies();
-  const foundMovies = ratedMovies.filter((movie) => movie.id === id);
+  const foundMovies = ratedMovies.filter((movie) => movie.movie.id === id);
 
   return foundMovies.length !== 0 ? foundMovies[0] : null;
 };
 
-const setRatedMovie = (id: number, value: number) => {
+const setRatedMovie = (movie: MovieInfo, value: number) => {
   const ratedMovies = getRatedMovies();
-  ratedMovies.push({id: id, rating: value});
+  ratedMovies.push({movie: movie, rating: value});
 
   localStorage.setItem("ratedMovies", JSON.stringify(ratedMovies));
 };
@@ -23,7 +24,7 @@ const setRatedMovie = (id: number, value: number) => {
 const removeRatedMovie = (id: number) => {
   let ratedMovies = getRatedMovies();
 
-  ratedMovies = ratedMovies.filter((movie) => movie.id !== id)
+  ratedMovies = ratedMovies.filter((movie) => movie.movie.id !== id)
 
   localStorage.setItem("ratedMovies", JSON.stringify(ratedMovies));
 };

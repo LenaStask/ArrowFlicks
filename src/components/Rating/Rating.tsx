@@ -8,7 +8,6 @@ import {
 } from "@mantine/core";
 import classes from "./Rating.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
-import MovieShortInfo from "@/types/MovieShortInfo";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import {
@@ -16,8 +15,9 @@ import {
   removeRatedMovie,
   setRatedMovie,
 } from "@/store/localStorage";
+import MovieInfo from "@/types/MovieInfo";
 
-const Rating = ({ movie }: { movie: MovieShortInfo }) => {
+const Rating = ({ movie }: { movie: MovieInfo }) => {
   const ratedMovie = getRatedMovie(movie.id);
 
   const [opened, { open, close }] = useDisclosure(false);
@@ -33,7 +33,7 @@ const Rating = ({ movie }: { movie: MovieShortInfo }) => {
         centered
       >
         <Flex direction={"column"} gap={16}>
-          <Text className={classes.modalTitle}>{movie.title}</Text>
+          <Text className={classes.modalTitle}>{movie.original_title}</Text>
           <MantineRating
             value={value}
             onChange={setValue}
@@ -44,7 +44,7 @@ const Rating = ({ movie }: { movie: MovieShortInfo }) => {
             <Button
               className={classes.fillButton}
               onClick={() => {
-                setRatedMovie(movie.id, value);
+                setRatedMovie(movie, value);
                 close();
               }}
             >

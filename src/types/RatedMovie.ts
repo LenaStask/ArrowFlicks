@@ -1,4 +1,6 @@
+import MovieInfo from "./MovieInfo";
+
 export default interface RatedMovie {
-  id: number;
+  movie: MovieInfo;
   rating: number;
 }
