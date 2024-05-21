@@ -5,10 +5,12 @@ import { getRatedMovies } from "@/store/localStorage";
 import MovieList from "@/components/MovieList/MovieList";
 import MovieInfo from "@/types/MovieInfo";
 import { useQueries } from "@tanstack/react-query";
-import { Pagination } from "@mantine/core";
+import { Pagination, Image, Text, Button, Group } from "@mantine/core";
 import classes from "./page.module.css";
 import { useEffect, useState } from "react";
 import RatedMovie from "@/types/RatedMovie";
+import no_ratedMovies from "../../../assets/no_rated_movies.svg";
+import NextImage from "next/image";
 
 export default function RatedMovies() {
   const [movies, setMovies] = useState<RatedMovie[]>([]);
@@ -47,6 +49,18 @@ export default function RatedMovies() {
       };
     },
   });
+
+  if(movies.length === 0) {
+    return(
+      <div className={classes.container}>
+        <Group className={classes.group}>
+          <Image src={no_ratedMovies} alt="No rated movies image" component={NextImage}></Image>
+          <Text>You haven&apos;t rated any films yet</Text>
+          <Button component="a" href="/" color="purple.1">Find movies</Button>
+        </Group>
+      </div>
+    );
+  }
 
   if (!queries.pending) {
     return (
