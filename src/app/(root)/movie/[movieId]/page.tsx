@@ -20,7 +20,7 @@ export default function MovieDetails({
   if (isSuccess) {
     return (
       <div className={classes.container}>
-        <Text>Movie / {data.title}</Text>
+        <div className={classes.path}><span>Movies</span> / <span>{data.title}</span></div>
         <Movie movie={data} />
         <Trailer movie={data} />
       </div>

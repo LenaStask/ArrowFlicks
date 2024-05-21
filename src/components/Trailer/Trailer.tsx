@@ -42,7 +42,7 @@ const Trailer = ({ movie }: { movie: Movie }) => {
             src={`https://www.youtube.com/embed/${data.results[0].key}`}
           ></iframe>
         </Group>
-        <Group className={classes.section}>
+        <Group className={classes.description}>
           <Title order={2} className={classes.title}>
             Description
           </Title>

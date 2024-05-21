@@ -3,3 +3,11 @@
   flex-direction: column;
   gap: 20px;
 }
+
+.path {
+  & span {
+    color: var(--mantine-color-purple-1);
+    font-size: 14px;
+    line-height: 20px;
+  }
+}

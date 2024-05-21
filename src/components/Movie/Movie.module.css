@@ -1,6 +1,6 @@
 .card {
   flex-direction: row;
-  gap: 16px;
+  justify-content: space-between;
   max-height: 400px;
   max-width: 800px;
   background-color: var(--mantine-color-grey-6);
@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 16px;
 }
 .title {
   color: var(--mantine-color-purple-1);
@@ -52,6 +53,7 @@
 
 .genres {
   margin-top: 12px;
+  line-height: 20px;
   color: var(--mantine-color-grey-1);
   & span {
     color: var(--mantine-color-grey-0);

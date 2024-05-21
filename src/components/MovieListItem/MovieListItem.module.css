@@ -13,9 +13,7 @@
   justify-content: space-between;
   width: 250px;
 }
-.infoSection {
-  margin-bottom: 62px ;
-}
+
 .cardTitle {
   color: var(--mantine-color-purple-1);
   font-weight: 600;
@@ -25,10 +23,12 @@
 .year {
   color: var(--mantine-color-grey-1);
   font-size: 16px;
+  line-height: 20px;
   margin: 0 0 8px 0;
 }
 
 .vote {
+  line-height: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -49,6 +49,7 @@
 .genres {
   margin: 0;
   color: var(--mantine-color-grey-1);
+  line-height: 20px;
   & span {
     color: var(--mantine-color-grey-0);
   }
