@@ -4,16 +4,17 @@ import { IconChevronDown } from "@tabler/icons-react";
 import { useState } from "react";
 
 interface ChildProps {
+  value: string;
   onChange: (value: string) => void;
 }
 
-const Sorting = ({onChange}:ChildProps) => {
-  const [value, setValue] = useState<string | null>("popularity.desc");
+const Sorting = ({ value, onChange }: ChildProps) => {
+  const [selectedValue, setSelectedValue] = useState<string | null>(value);
 
-  const sendOptionValue = (value:string) => {
-    setValue(value);
-    onChange(value);
-  }
+  const handleChange = (newValue: string) => {
+    setSelectedValue(newValue);
+    onChange(newValue);
+  };
 
   return (
     <Select
@@ -42,11 +43,11 @@ const Sorting = ({onChange}:ChildProps) => {
         { value: "original_title.desc", label: "Original Title A-Z" },
         { value: "original_title.asc", label: "Original Title Z-A" },
       ]}
-      value={value}
-      onChange={(_value) => sendOptionValue(_value as string)}
+      value={selectedValue}
+      onChange={(_value) => handleChange(_value as string)}
       allowDeselect={false}
       withCheckIcon={false}
-    /> 
+    />
   );
 };
 
