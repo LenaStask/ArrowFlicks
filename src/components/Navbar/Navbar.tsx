@@ -1,10 +1,11 @@
 "use client";
 
-import { Burger, Flex, Paper, Transition } from "@mantine/core";
+import { Burger, Button, Flex, Paper, Transition } from "@mantine/core";
 import { Logo } from "../Logo/Logo";
 import classes from "./Navbar.module.css";
 import { useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
+import Link from 'next/link';
 
 const data = [
   { link: "/", label: "Movies" },
@@ -16,18 +17,20 @@ const Navbar = () => {
   const [opened, { toggle }] = useDisclosure(false);
 
   const links = data.map((item) => (
-    <a
-      className={classes.link}
-      data-active={item.label === active || undefined}
-      href={item.link}
-      key={item.label}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(item.label);
+    <Button 
+      classNames={{
+        root: classes.buttonroot
       }}
+      justify={'flex-start'}
+      key={item.label} 
+      component={Link} 
+      href={item.link} 
+      data-active={item.label === active ? 'true' : undefined}
+      onClick={() =>  setActive(item.label)}
     >
-      <span>{item.label}</span>
-    </a>
+      {item.label}
+    </Button>
+
   ));
 
   return (
