@@ -1,5 +1,8 @@
 .container {
+  margin-bottom: 24px;
   flex-direction: row;
+  justify-content: space-between;
+  gap:16px;
 }
 
 .label {
@@ -11,12 +14,15 @@
 .input {
   border-radius: 8px;
   border: 1px solid var(--mantine-color-grey-3);
-  width: 284px;
+  width: 283px;
   min-height: 42px;
   &:hover {
     border: 1px solid var(--mantine-color-purple-1);
   }
   &[data-expanded] {
+    border: 1px solid var(--mantine-color-purple-1);
+  }
+  &[area-expanded] {
     border: 1px solid var(--mantine-color-purple-1);
   }
 }
@@ -42,5 +48,44 @@
     border-radius: 8px;
     background-color: var(--mantine-color-purple-1);
     color: var(--mantine-color-grey-7);
+  }
+}
+
+.numberInput {
+  border-radius: 8px;
+  border: 1px solid var(--mantine-color-grey-3);
+  width: 137px;
+  min-height: 42px;
+  &:hover {
+    border: 1px solid var(--mantine-color-purple-1);
+  }
+  &:focus {
+    border: 1px solid var(--mantine-color-purple-1);
+  }
+}
+
+.numberControl {
+  border: none;
+  padding: 0;
+  color: var(--mantine-color-grey-2);
+  &:hover {
+    color: var(--mantine-color-purple-2);
+    background-color: transparent;
+  }
+  &:active {
+    color: var(--mantine-color-purple-1);
+  }
+} 
+
+.transporentButton {
+  align-self: flex-end;
+  margin-bottom: 3px;
+  color: var(--mantine-color-purple-1);
+  font-weight: 500;
+  &:hover {
+    color: var(--mantine-color-purple-2);
+  }
+  &:active {
+    color: var(--mantine-color-purple-0);
   }
 }

@@ -1,4 +1,10 @@
-import { GenreList, Movie, MovieList, VideoList } from "./types";
+import {
+  GenreList,
+  Movie,
+  MovieList,
+  MovieListFilters,
+  VideoList,
+} from "./types";
 
 const getGenres = async (): Promise<GenreList> => {
   const res = await fetch(`/api/proxy/genre/movie/list`);
@@ -12,9 +18,27 @@ const getMovie = async (id: number): Promise<Movie> => {
   return await res.json();
 };
 
-const getMovies = async (page: number, sorting: string): Promise<MovieList> => {
+const getMovies = async (
+  filters: MovieListFilters,
+  sorting: string,
+  page: number
+): Promise<MovieList> => {
+  const searchParams = new URLSearchParams();
+
+  if (filters.with_genres) {
+    searchParams.append("with_genres", filters.with_genres);
+  }
+  if (filters.primary_release_year) {
+    searchParams.append(
+      "primary_release_year",
+      filters.primary_release_year.toString()
+    );
+  }
+  searchParams.append("sort_by", sorting);
+  searchParams.append("page", page.toString());
+
   const res = await fetch(
-    `/api/proxy/discover/movie?page=${page}&sort_by=${sorting}`
+    `/api/proxy/discover/movie?${searchParams.toString()}`
   );
 
   return await res.json();

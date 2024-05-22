@@ -27,7 +27,7 @@ const Search = ({ onChange }: ChildProps) => {
         <IconSearch style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
       }
       rightSection={
-        <Button color="purple.1" onClick={() => handleButtonClick(value)}>
+        <Button className={classes.fillButton} color="purple.1" onClick={() => handleButtonClick(value)}>
           Search
         </Button>
       }

@@ -1,42 +1,44 @@
-import { Flex, MultiSelect, Select } from "@mantine/core";
+import { Button, Flex, Group, MultiSelect, NumberInput } from "@mantine/core";
 import { useState } from "react";
 import classes from "./Filters.module.css";
-import { useQuery } from "@tanstack/react-query";
 import { IconChevronDown } from "@tabler/icons-react";
 import { YearPickerInput } from "@mantine/dates";
-import { getGenres } from "@/api/tmdb/TmdbApi";
-import { Genre } from "@/api/tmdb/types";
-
-interface IFilters {
-  genres: string[];
-  year: number;
-}
+import { Genre, MovieListFilters } from "@/api/tmdb/types";
 
 interface ChildProps {
-  onChange: (value: IFilters) => void;
+  genres: Genre[];
+  onChange: (value: MovieListFilters) => void;
 }
 
-const Filters = ({ onChange }: ChildProps) => {
-  const { data, isSuccess } = useQuery({
-    queryFn: () => getGenres(),
-    queryKey: ["genres"],
-  });
+const Filters = ({ onChange, genres }: ChildProps) => {
+  const comboboxData = genres.map((item: Genre) => ({
+    value: item.id.toString(),
+    label: item.name,
+  }));
 
-  const sendOptionValue = (genres: string[]) => {
-    setFilters(filters);
-    onChange(filters);
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+
+  const handleChangeGenres = (genres: string[]) => {
+    setSelectedGenres(genres);
+    triggerOnChange();
   };
 
-  const genresList = isSuccess && data.genres.map((item: Genre) => item.name);
-  const [filters, setFilters] = useState<IFilters>({ genres: [], year: 0 });
+  const triggerOnChange = () => {
+    onChange({
+      with_genres: selectedGenres.join(","),
+    });
+  };
 
   return (
     <Flex className={classes.container}>
       <MultiSelect
-        classNames={classes}
+        classNames={{
+          input: classes.input,
+          label: classes.label
+        }}
         label="Genres"
-        data={genresList}
-        value={filters.genres}
+        data={comboboxData}
+        value={selectedGenres}
         placeholder="Select genre"
         rightSection={
           <IconChevronDown
@@ -45,12 +47,15 @@ const Filters = ({ onChange }: ChildProps) => {
             className={classes.selectIcon}
           />
         }
-        onChange={(_value) => sendOptionValue(_value as string[])}
+        onChange={handleChangeGenres}
         withCheckIcon={false}
         clearable={true}
       />
       <YearPickerInput
-        classNames={classes}
+        classNames={{
+          input: classes.input,
+          label: classes.label,
+          }}
         placeholder="Select release year"
         label="Release year"
         rightSection={
@@ -61,6 +66,35 @@ const Filters = ({ onChange }: ChildProps) => {
           />
         }
       />
+      <Group gap={8}>
+        <NumberInput
+          classNames={{
+            input: classes.numberInput,
+            section: classes.numberSection,
+            control: classes.numberControl,
+            label: classes.label,
+          }}
+          label="Ratings"
+          placeholder="From"
+          min={0}
+          max={10}
+          step={1}
+        />
+        <NumberInput
+          classNames={{
+            input: classes.numberInput,
+            section: classes.numberSection,
+            control: classes.numberControl,
+            label: classes.label,
+          }}
+          label=" "
+          placeholder="To"
+        />
+      </Group>
+        <Button
+          variant="transparent"
+          className={classes.transporentButton}
+        >Reset filters</Button>
     </Flex>
   );
 };

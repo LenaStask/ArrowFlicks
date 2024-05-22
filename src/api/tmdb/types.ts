@@ -59,6 +59,13 @@ export interface Movie {
   vote_count: number;
 }
 
+export interface MovieListFilters {
+  with_genres?: string;
+  primary_release_year?: number;
+  "vote_average.gte"?: number;
+  "vote_average.lte"?: number;
+}
+
 export interface MovieListItem {
   adult: boolean;
   backdrop_path: string;

@@ -5,7 +5,7 @@ import { getMovie } from "../../../../api/tmdb/TmdbApi";
 import Movie from "@/components/Movie/Movie";
 import Trailer from "@/components/Trailer/Trailer";
 import classes from "./page.module.css";
-import { Text } from "@mantine/core";
+import { Center, Loader, Text } from "@mantine/core";
 
 export default function MovieDetails({
   params,
@@ -16,6 +16,14 @@ export default function MovieDetails({
     queryFn: () => getMovie(Number(params.movieId)),
     queryKey: ["movie", params.movieId],
   });
+
+  if (isLoading) {
+    return (
+      <Center>
+        <Loader color="purple.1" size="xl" type="dots" />
+      </Center>
+    );
+  }
 
   if (isSuccess) {
     return (
