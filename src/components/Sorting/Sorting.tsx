@@ -1,6 +1,6 @@
 import { Select } from "@mantine/core";
 import classes from "./Sorting.module.css";
-import { IconChevronDown } from "@tabler/icons-react";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
 import { useState } from "react";
 
 interface ChildProps {
@@ -16,17 +16,28 @@ const Sorting = ({ value, onChange }: ChildProps) => {
     onChange(newValue);
   };
 
+  //rightSecton icon
+  const [expanded, setExpanded] = useState(false);
+  const handleDropdownOpen = () => setExpanded(true);
+  const handleDropdownClose = () => setExpanded(false);
+
   return (
     <Select
       classNames={classes}
       label="Sort by"
       rightSection={
-        <IconChevronDown
-          stroke={1.5}
-          size={24}
-          className={classes.selectIcon}
-        />
+        expanded ? (
+          <IconChevronUp stroke={1.5} size={24} className={classes.iconUp} />
+        ) : (
+          <IconChevronDown
+            stroke={1.5}
+            size={24}
+            className={classes.iconDown}
+          />
+        )
       }
+      onDropdownOpen={handleDropdownOpen}
+      onDropdownClose={handleDropdownClose}
       data={[
         { value: "popularity.desc", label: "Most Popular" },
         { value: "popularity.asc", label: "Least Popular" },

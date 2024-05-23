@@ -1,7 +1,8 @@
 .card {
   flex-direction: row;
   gap: 16px;
-  max-width: 482px;
+  justify-content: space-between;
+  width: 482px;
   background-color: var(--mantine-color-grey-6);
   border-radius: 12px;
   padding: 24px; 

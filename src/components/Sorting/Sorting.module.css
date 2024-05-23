@@ -2,10 +2,12 @@
   align-self: flex-end;
   margin-bottom: 24px;
 }
+
 .label {
   color: var(--mantine-color-grey-0);
   font-size: 16px; 
   font-weight: 600;
+  margin-bottom: 8px;
 }
 
 .input {
@@ -21,7 +23,11 @@
   }
 }
 
-.selectIcon {
+.iconUp {
+  color: var(--mantine-color-purple-1);
+}
+
+.iconDown {
   color: var(--mantine-color-grey-3);
 }
 
