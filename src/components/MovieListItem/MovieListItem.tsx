@@ -1,7 +1,7 @@
 import { Card, Image, Text, Group, Flex, Title } from "@mantine/core";
 import classes from "./MovieListItem.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
-import no_poster from "../../assets/no_poster.svg";
+import no_poster from "../../assets/no_poster_sm.svg";
 import Rating from "../Rating/Rating";
 import MovieInfo from "@/types/MovieInfo";
 import NextImage from "next/image";

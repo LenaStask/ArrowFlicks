@@ -2,7 +2,7 @@ import NextImage from "next/image";
 import { Card, Image, Text, Group, Flex, Title } from "@mantine/core";
 import classes from "./Movie.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
-import no_poster from "../../assets/no_poster.svg";
+import no_poster from "../../assets/no_poster_lg.svg";
 import { Movie as IMovie } from "@/api/tmdb/types";
 import Rating from "../Rating/Rating";
 
