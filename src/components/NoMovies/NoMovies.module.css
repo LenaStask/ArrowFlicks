@@ -1,0 +1,12 @@
+.centerRoot {
+  flex-direction: column;
+  text-align: center;
+  & p {
+    font-weight: 600;
+    font-size: 20px;
+  }
+}
+
+.imageRoot {
+  width: 310px;
+}

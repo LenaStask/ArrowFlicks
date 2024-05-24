@@ -22,16 +22,3 @@
 .dots{
   display: none;
 }
-
-.centerRoot {
-  flex-direction: column;
-  & p {
-  font-weight: 600;
-  font-size: 20px;
-  }
-}
-
-.imageRoot {
-  width: 310px;
-}
-

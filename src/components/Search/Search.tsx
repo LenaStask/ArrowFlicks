@@ -2,6 +2,7 @@ import { Button, TextInput, rem } from "@mantine/core";
 import { IconSearch } from "@tabler/icons-react";
 import classes from "./Search.module.css";
 import { useState } from "react";
+import { getHotkeyHandler } from "@mantine/hooks";
 
 interface ChildProps {
   onChange: (value: string) => void;
@@ -27,10 +28,17 @@ const Search = ({ onChange }: ChildProps) => {
         <IconSearch style={{ width: rem(18), height: rem(18) }} stroke={1.5} />
       }
       rightSection={
-        <Button className={classes.fillButton} color="purple.1" onClick={() => handleButtonClick(value)}>
+        <Button
+          className={classes.fillButton}
+          color="purple.1"
+          onClick={() => handleButtonClick(value)}
+        >
           Search
         </Button>
       }
+      onKeyDown={getHotkeyHandler([
+        ["Enter", () => handleButtonClick(value)],
+      ])}
     />
   );
 };

@@ -11,31 +11,37 @@ import {
   Group,
   Title,
   Flex,
+  Center,
 } from "@mantine/core";
 import classes from "./page.module.css";
 import { useEffect, useState } from "react";
 import no_ratedMovies from "../../../assets/no_rated_movies.svg";
 import NextImage from "next/image";
 import Search from "@/components/Search/Search";
-import Loader from '@/components/Loader/Loader';
+import Loader from "@/components/Loader/Loader";
+import NoMovies from "@/components/NoMovies/NoMovies";
 
 export default function RatedMovies() {
   const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState<MovieInfo[]>([]);
+  const [foundMovies, setFoundMovies] = useState<MovieInfo[]>([]);
   const [activePage, setPage] = useState(1);
 
   const handleSearchChange = (value: string) => {
     value = value.toLowerCase();
 
     const foundMovies = movies.filter((movie) =>
-      movie.original_title.toLocaleLowerCase().includes(value)
+      movie.original_title.toLocaleLowerCase().includes(value),
     );
 
-    setMovies(foundMovies);
+    setFoundMovies(foundMovies);
   };
 
   useEffect(() => {
-    setMovies(getRatedMovies().map((item) => item.movie));
+    const ratedMovies = getRatedMovies().map((item) => item.movie);
+
+    setMovies(ratedMovies);
+    setFoundMovies(ratedMovies);
     setIsLoading(false);
   }, []);
 
@@ -52,12 +58,12 @@ export default function RatedMovies() {
   };
 
   if (isLoading) {
-    return <Loader></Loader>;
+    return <Loader />;
   }
 
   if (movies.length === 0) {
     return (
-      <div className={classes.container}>
+      <Flex>
         <Group className={classes.group}>
           <Image
             src={no_ratedMovies}
@@ -69,27 +75,35 @@ export default function RatedMovies() {
             Find movies
           </Button>
         </Group>
-      </div>
+      </Flex>
     );
   }
 
   return (
-    <Flex direction={"column"}>
+    <Flex className={classes.container}>
       <Group className={classes.search}>
         <Title order={1}>Rated Movies</Title>
         <Search onChange={handleSearchChange} />
       </Group>
-      <MovieList
-        movies={getMoviesForPage(movies, activePage - 1) as MovieInfo[]}
-      />
-      <Pagination
-        classNames={classes}
-        value={activePage}
-        onChange={setPage}
-        total={getNumberOfPages(movies)}
-        color="purple.1"
-        boundaries={-1}
-      />
+      {foundMovies.length !== 0 ? (
+        <>
+          <MovieList
+            movies={
+              getMoviesForPage(foundMovies, activePage - 1) as MovieInfo[]
+            }
+          />
+          <Pagination
+            classNames={classes}
+            value={activePage}
+            onChange={setPage}
+            total={getNumberOfPages(foundMovies)}
+            color="purple.1"
+            boundaries={-1}
+          />
+        </>
+      ) : (
+        <NoMovies />
+      )}
     </Flex>
   );
 }

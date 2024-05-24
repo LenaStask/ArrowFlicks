@@ -5,7 +5,6 @@ import {
   MultiSelect,
   NumberInput,
   Select,
-  MultiSelectValueProps,
 } from "@mantine/core";
 import { useState } from "react";
 import classes from "./Filters.module.css";
@@ -30,19 +29,19 @@ const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
   }));
 
   const [selectedGenres, setSelectedGenres] = useState<string[]>(
-    value.with_genres?.split(",") ?? []
+    value.with_genres?.split(",") ?? [],
   );
 
   const [selectedYear, setSelectedYear] = useState<string | null>(
-    value.primary_release_year?.toString() ?? null
+    value.primary_release_year?.toString() ?? null,
   );
 
   const [selectedRatingFrom, setSelectedRatingFrom] = useState<string>(
-    value["vote_average.gte"] ?? ""
+    value["vote_average.gte"] ?? "",
   );
 
   const [selectedRatingTo, setSelectedRatingTo] = useState<string>(
-    value["vote_average.lte"] ?? ""
+    value["vote_average.lte"] ?? "",
   );
 
   const handleGenresChange = (genres: string[]) => {

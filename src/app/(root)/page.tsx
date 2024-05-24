@@ -2,7 +2,7 @@
 
 import { getGenres, getMovies } from "../../api/tmdb/TmdbApi";
 import MovieList from "@/components/MovieList/MovieList";
-import { Center, Text, Pagination, Image, Title } from "@mantine/core";
+import { Pagination, Title } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import classes from "./page.module.css";
@@ -10,9 +10,8 @@ import Sorting from "@/components/Sorting/Sorting";
 import Filters from "@/components/Filters/Filters";
 import convertToMovieInfo from "@/helpers/convertToMovieInfo";
 import { MovieListFilterNames, MovieListFilters } from "@/api/tmdb/types";
-import no_movies from "../../assets/no_movies.svg";
-import NextImage from "next/image";
 import Loader from "@/components/Loader/Loader";
+import NoMovies from "@/components/NoMovies/NoMovies";
 
 const MAX_TOTAL_PAGES = 500;
 
@@ -46,13 +45,13 @@ export default function Home() {
   };
 
   if (genresQuery.isLoading) {
-    return <Loader></Loader>;
+    return <Loader />;
   }
 
   if (genresQuery.isSuccess) {
     return (
       <div className={classes.container}>
-        <Title className={classes.title} order={1}>Movies</Title>
+        <Title className={classes.title}>Movies</Title>
         <Filters
           genres={genresQuery.data.genres}
           value={filters}
@@ -60,24 +59,16 @@ export default function Home() {
           onReset={handleFiltersReset}
         />
         <Sorting value={sorting} onChange={handleSortingChange} />
-        {moviesQuery.isLoading ? <Loader></Loader> : ""}
+        {moviesQuery.isLoading ? <Loader /> : ""}
         {moviesQuery.isSuccess ? (
           moviesQuery.data.results.length === 0 ? (
-            <Center classNames={{ root: classes.centerRoot }}>
-              <Image
-                classNames={{ root: classes.imageRoot }}
-                src={no_movies}
-                alt="No movies image"
-                component={NextImage}
-              ></Image>
-              <Text>We don&apos;t have such movies, look for another one</Text>
-            </Center>
+            <NoMovies />
           ) : (
             <>
               <MovieList
                 movies={convertToMovieInfo(
                   moviesQuery.data.results,
-                  genresQuery.data.genres
+                  genresQuery.data.genres,
                 )}
               />
               <Pagination
