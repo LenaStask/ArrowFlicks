@@ -16,7 +16,15 @@ const getRatedMovie = (id: number): RatedMovie | null => {
 
 const setRatedMovie = (movie: MovieInfo, value: number) => {
   const ratedMovies = getRatedMovies();
-  ratedMovies.push({ movie: movie, rating: value });
+
+  const i = ratedMovies.findIndex(
+    (ratedMovie) => ratedMovie.movie.id === movie.id,
+  );
+  if (i !== -1) {
+    ratedMovies[i].rating = value;
+  } else {
+    ratedMovies.push({ movie: movie, rating: value });
+  }
 
   localStorage.setItem("ratedMovies", JSON.stringify(ratedMovies));
 };
