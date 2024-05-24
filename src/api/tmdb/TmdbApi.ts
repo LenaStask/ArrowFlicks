@@ -3,7 +3,6 @@ import {
   Movie,
   MovieList,
   MovieListFilters,
-  VideoList,
 } from "./types";
 
 const getGenres = async (): Promise<GenreList> => {
@@ -13,7 +12,7 @@ const getGenres = async (): Promise<GenreList> => {
 };
 
 const getMovie = async (id: number): Promise<Movie> => {
-  const res = await fetch(`/api/proxy/movie/${id}`);
+  const res = await fetch(`/api/proxy/movie/${id}?append_to_response=videos`);
 
   return await res.json();
 };
@@ -50,10 +49,4 @@ const getMovies = async (
   return await res.json();
 };
 
-const getVideos = async (id: number): Promise<VideoList> => {
-  const res = await fetch(`/api/proxy/movie/${id}/videos`);
-
-  return await res.json();
-};
-
-export { getMovies, getGenres, getMovie, getVideos };
+export { getMovies, getGenres, getMovie };

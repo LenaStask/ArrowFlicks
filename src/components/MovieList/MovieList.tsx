@@ -1,7 +1,6 @@
 import { Container } from "@mantine/core";
 import classes from "./MovieList.module.css";
 import MovieListItem from "../MovieListItem/MovieListItem";
-import { MovieListItem as IMovieListItem, Movie } from "@/api/tmdb/types";
 import MovieInfo from '@/types/MovieInfo';
 
 const MovieList = ({ movies }: { movies: MovieInfo[] }) => {

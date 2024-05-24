@@ -34,16 +34,18 @@ export default function Home() {
     setSorting(value);
   };
 
-  const handleFiltersChange = (filter: { [key in MovieListFilterNames]?: string }) => {
+  const handleFiltersChange = (filter: {
+    [key in MovieListFilterNames]?: string;
+  }) => {
     setFilters((prevState) => ({ ...prevState, ...filter }));
   };
 
-  if(genresQuery.isError || moviesQuery.isError) {
-    return (
-      <div>
-        {genresQuery.error?.message}
-      </div>
-    );
+  const handleFiltersReset = () => {
+    setFilters({});
+  };
+
+  if (genresQuery.isError || moviesQuery.isError) {
+    return <div>{genresQuery.error?.message}</div>;
   }
 
   if (genresQuery.isLoading || moviesQuery.isLoading) {
@@ -58,39 +60,40 @@ export default function Home() {
     return (
       <div className={classes.container}>
         <Filters
+          genres={genresQuery.data.genres}
           value={filters}
           onChange={handleFiltersChange}
-          genres={genresQuery.data.genres}
+          onReset={handleFiltersReset}
         />
         <Sorting value={sorting} onChange={handleSortingChange} />
-      {moviesQuery.data.results.length === 0?
-      <Center classNames={{root: classes.centerRoot}}>
-        <Image
-          classNames={{root: classes.imageRoot}}
-          src={no_movies}
-          alt="No movies image"
-          component={NextImage}
-        ></Image>
-          <Text>We don&apos;t have such movies, look for another one</Text>
-      </Center>
-      :
-      <>
-        <MovieList
-          movies={convertToMovieInfo(
-            moviesQuery.data.results,
-            genresQuery.data.genres
-          )}
-        />
-        <Pagination
-        classNames={classes}
-        value={activePage}
-        onChange={setPage}
-        total={Math.min(moviesQuery.data.total_pages, MAX_TOTAL_PAGES)}
-        color="purple.1"
-        boundaries={-1}
-      />
-      </>
-      }
+        {moviesQuery.data.results.length === 0 ? (
+          <Center classNames={{ root: classes.centerRoot }}>
+            <Image
+              classNames={{ root: classes.imageRoot }}
+              src={no_movies}
+              alt="No movies image"
+              component={NextImage}
+            ></Image>
+            <Text>We don&apos;t have such movies, look for another one</Text>
+          </Center>
+        ) : (
+          <>
+            <MovieList
+              movies={convertToMovieInfo(
+                moviesQuery.data.results,
+                genresQuery.data.genres
+              )}
+            />
+            <Pagination
+              classNames={classes}
+              value={activePage}
+              onChange={setPage}
+              total={Math.min(moviesQuery.data.total_pages, MAX_TOTAL_PAGES)}
+              color="purple.1"
+              boundaries={-1}
+            />
+          </>
+        )}
       </div>
     );
   }

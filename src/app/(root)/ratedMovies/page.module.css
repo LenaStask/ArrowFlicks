@@ -26,4 +26,7 @@
 .search {
   justify-content: space-between;
   margin-bottom: 40px;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+  }
 }

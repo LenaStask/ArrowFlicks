@@ -3,6 +3,10 @@
   flex-direction: row;
   justify-content: space-between;
   gap:16px;
+  @media (max-width: 1000px) {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 
 .label {
@@ -109,5 +113,12 @@
   }
   &:active {
     color: var(--mantine-color-purple-0);
+  }
+  &[data-disabled="true"] {
+    color: var(--mantine-color-grey-1);
+    background-color: transparent;
+  }
+  @media (max-width: 1000px) {
+    align-self: center;
   }
 }

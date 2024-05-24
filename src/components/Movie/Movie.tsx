@@ -21,7 +21,6 @@ const Movie = ({ movie }: { movie: IMovie }) => {
       <Flex>
         {movie.poster_path === null ? (
           <Image
-            priority={true}
             src={no_poster}
             width={250}
             height={352}
@@ -30,11 +29,9 @@ const Movie = ({ movie }: { movie: IMovie }) => {
           />
         ) : (
           <Image
-            priority={true}
             src={"https://image.tmdb.org/t/p/w185" + movie.poster_path}
             width={250}
             height={352}
-            component={NextImage}
             alt="poster"
           />
         )}

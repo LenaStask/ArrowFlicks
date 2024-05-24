@@ -1,6 +1,9 @@
 .root {
   align-self: flex-end;
   margin-bottom: 24px;
+  @media (max-width: 1000px) {
+    align-self: center;
+  }
 }
 
 .label {

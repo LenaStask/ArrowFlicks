@@ -57,6 +57,9 @@ export interface Movie {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  videos: {
+    results: VideoListItem[];
+  }
 }
 
 export enum MovieListFilterNames {
@@ -105,9 +108,4 @@ export interface VideoListItem {
   official: boolean;
   published_at: string;
   id: string;
-}
-
-export interface VideoList {
-  id: number;
-  results: VideoListItem[];
 }

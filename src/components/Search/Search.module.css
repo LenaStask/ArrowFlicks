@@ -1,5 +1,8 @@
 .root {
   width: 490px;
+  @media (max-width: 1000px) {
+    width: 400px;
+  }
 }
 .input {
   height: 48px;

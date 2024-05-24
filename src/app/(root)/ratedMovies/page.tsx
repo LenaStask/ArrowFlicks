@@ -3,7 +3,17 @@
 import { getRatedMovies } from "@/store/localStorage";
 import MovieList from "@/components/MovieList/MovieList";
 import MovieInfo from "@/types/MovieInfo";
-import { Pagination, Image, Text, Button, Group, Title, Flex } from "@mantine/core";
+import {
+  Pagination,
+  Image,
+  Text,
+  Button,
+  Group,
+  Title,
+  Flex,
+  Center,
+  Loader,
+} from "@mantine/core";
 import classes from "./page.module.css";
 import { useEffect, useState } from "react";
 import no_ratedMovies from "../../../assets/no_rated_movies.svg";
@@ -11,6 +21,7 @@ import NextImage from "next/image";
 import Search from "@/components/Search/Search";
 
 export default function RatedMovies() {
+  const [isLoading, setIsLoading] = useState(true);
   const [movies, setMovies] = useState<MovieInfo[]>([]);
   const [activePage, setPage] = useState(1);
 
@@ -26,6 +37,7 @@ export default function RatedMovies() {
 
   useEffect(() => {
     setMovies(getRatedMovies().map((item) => item.movie));
+    setIsLoading(false);
   }, []);
 
   const getMoviesForPage = (movies: MovieInfo[], page: number): MovieInfo[] => {
@@ -39,6 +51,14 @@ export default function RatedMovies() {
 
     return Math.ceil(movies.length / 4);
   };
+
+  if (isLoading) {
+    return (
+      <Center>
+        <Loader color="purple.1" size="xl" type="dots" />
+      </Center>
+    );
+  }
 
   if (movies.length === 0) {
     return (
@@ -59,7 +79,7 @@ export default function RatedMovies() {
   }
 
   return (
-    <Flex direction={'column'}>
+    <Flex direction={"column"}>
       <Group className={classes.search}>
         <Title>Rated Movies</Title>
         <Search onChange={handleSearchChange} />

@@ -19,31 +19,35 @@ interface ChildProps {
   genres: Genre[];
   value: MovieListFilters;
   onChange: (value: { [key in MovieListFilterNames]?: string }) => void;
+  onReset: () => void;
 }
 
-const Filters = ({ genres, value, onChange }: ChildProps) => {
+const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
   const genresData = genres.map((item: Genre) => ({
     value: item.id.toString(),
     label: item.name,
   }));
 
-  const yearsData: string[] = [];
-  for (let i = 2024; i >= 1800; i--) {
-    yearsData.push(i.toString());
-  }
-
   const [selectedGenres, setSelectedGenres] = useState<string[]>(
     value.with_genres?.split(",") ?? []
+  );
+
+  const [selectedYear, setSelectedYear] = useState<string | null>(
+    value.primary_release_year?.toString() ?? null
+  );
+
+  const [selectedRatingFrom, setSelectedRatingFrom] = useState<string>(
+    value["vote_average.gte"] ?? ""
+  );
+
+  const [selectedRatingTo, setSelectedRatingTo] = useState<string>(
+    value["vote_average.lte"] ?? ""
   );
 
   const handleGenresChange = (genres: string[]) => {
     setSelectedGenres(genres);
     onChange({ [MovieListFilterNames.WithGenres]: genres.join(",") });
   };
-
-  const [selectedYear, setSelectedYear] = useState<string | null>(
-    value.primary_release_year?.toString() ?? ""
-  );
 
   const handleYearChange = (year: string | null) => {
     year = year ?? "";
@@ -52,20 +56,12 @@ const Filters = ({ genres, value, onChange }: ChildProps) => {
     onChange({ [MovieListFilterNames.PrimaryReleaseYear]: year });
   };
 
-  const [selectedRatingFrom, setSelectedRatingFrom] = useState<string>(
-    value["vote_average.gte"] ?? ""
-  );
-
   const handleRatingFromChange = (rating: string | number) => {
     rating = rating.toString();
 
     setSelectedRatingFrom(rating);
     onChange({ [MovieListFilterNames.VoteAverageGte]: rating });
   };
-
-  const [selectedRatingTo, setSelectedRatingTo] = useState<string>(
-    value["vote_average.lte"] ?? ""
-  );
 
   const handleRatingToChange = (rating: string | number) => {
     rating = rating.toString();
@@ -77,12 +73,20 @@ const Filters = ({ genres, value, onChange }: ChildProps) => {
   const handleReset = () => {
     setSelectedGenres([]);
     setSelectedYear(null);
-    setSelectedRatingFrom('');
-    setSelectedRatingTo('');
-    onChange({
-      
-    });
-  }
+    setSelectedRatingFrom("");
+    setSelectedRatingTo("");
+
+    onReset();
+  };
+
+  const isDisabled = () => {
+    return (
+      selectedGenres.length === 0 &&
+      selectedYear === null &&
+      selectedRatingFrom === "" &&
+      selectedRatingTo === ""
+    );
+  };
 
   const [expandedGenres, setExpandedGenres] = useState(false);
   const handleGenresDropdownOpen = () => setExpandedGenres(true);
@@ -91,6 +95,11 @@ const Filters = ({ genres, value, onChange }: ChildProps) => {
   const [expandedYear, setExpandedYear] = useState(false);
   const handleYearDropdownOpen = () => setExpandedYear(true);
   const handleYearDropdownClose = () => setExpandedYear(false);
+
+  const yearsData: string[] = [];
+  for (let i = 2024; i >= 1800; i--) {
+    yearsData.push(i.toString());
+  }
 
   return (
     <Flex className={classes.container}>
@@ -176,11 +185,12 @@ const Filters = ({ genres, value, onChange }: ChildProps) => {
           placeholder="To"
         />
       </Group>
-      <Button 
-        variant="transparent"   
+      <Button
+        variant="transparent"
         className={classes.transporentButton}
+        disabled={isDisabled()}
         onClick={handleReset}
-        >
+      >
         Reset filters
       </Button>
     </Flex>
