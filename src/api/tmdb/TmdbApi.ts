@@ -1,9 +1,4 @@
-import {
-  GenreList,
-  Movie,
-  MovieList,
-  MovieListFilters,
-} from "./types";
+import { GenreList, Movie, MovieList, MovieListFilters } from "./types";
 
 const getGenres = async (): Promise<GenreList> => {
   const res = await fetch(`/api/proxy/genre/movie/list`);
@@ -20,7 +15,7 @@ const getMovie = async (id: number): Promise<Movie> => {
 const getMovies = async (
   filters: MovieListFilters,
   sorting: string,
-  page: number
+  page: number,
 ): Promise<MovieList> => {
   const searchParams = new URLSearchParams();
 
@@ -30,7 +25,7 @@ const getMovies = async (
   if (filters.primary_release_year) {
     searchParams.append(
       "primary_release_year",
-      filters.primary_release_year.toString()
+      filters.primary_release_year.toString(),
     );
   }
   if (filters["vote_average.gte"]) {
@@ -43,7 +38,7 @@ const getMovies = async (
   searchParams.append("page", page.toString());
 
   const res = await fetch(
-    `/api/proxy/discover/movie?${searchParams.toString()}`
+    `/api/proxy/discover/movie?${searchParams.toString()}`,
   );
 
   return await res.json();

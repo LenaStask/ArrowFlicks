@@ -4,7 +4,7 @@ import classes from "./Movie.module.css";
 import { IconStarFilled } from "@tabler/icons-react";
 import no_poster from "../../assets/no_poster.svg";
 import { Movie as IMovie } from "@/api/tmdb/types";
-import Rating from '../Rating/Rating';
+import Rating from "../Rating/Rating";
 
 const convertDate = (date: string): string => {
   const newDate = new Date(date);
@@ -32,9 +32,9 @@ const Movie = ({ movie }: { movie: IMovie }) => {
           />
         ) : (
           <Image
-          classNames={{
-            root: classes.imageRoot,
-          }}
+            classNames={{
+              root: classes.imageRoot,
+            }}
             src={"https://image.tmdb.org/t/p/w185" + movie.poster_path}
             width={250}
             height={352}
@@ -81,7 +81,7 @@ const Movie = ({ movie }: { movie: IMovie }) => {
           </Group>
         </Flex>
       </Flex>
-        <Rating movie={movie}/>
+      <Rating movie={movie} />
     </Card>
   );
 };

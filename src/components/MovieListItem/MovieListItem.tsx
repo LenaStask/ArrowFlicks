@@ -5,7 +5,7 @@ import no_poster from "../../assets/no_poster.svg";
 import Rating from "../Rating/Rating";
 import MovieInfo from "@/types/MovieInfo";
 import NextImage from "next/image";
-import convertNumber from '@/helpers/convertNumber';
+import convertNumber from "@/helpers/convertNumber";
 
 const MovieListItem = ({ movie }: { movie: MovieInfo }) => {
   return (
@@ -38,7 +38,9 @@ const MovieListItem = ({ movie }: { movie: MovieInfo }) => {
               <Text className={classes.average}>
                 {movie.vote_average.toFixed(1)}
               </Text>
-              <Text className={classes.count}>{convertNumber(movie.vote_count)}</Text>
+              <Text className={classes.count}>
+                {convertNumber(movie.vote_count)}
+              </Text>
             </Group>
           </Flex>
           <Text className={classes.genres}>

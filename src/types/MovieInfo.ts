@@ -1,4 +1,4 @@
-import { Genre } from '@/api/tmdb/types';
+import { Genre } from "@/api/tmdb/types";
 
 export default interface MovieInfo {
   genres: Genre[];

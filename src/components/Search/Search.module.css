@@ -12,7 +12,7 @@
     border: 1px solid var(--mantine-color-purple-1);
   }
 }
-.section[data-position='right'] {
+.section[data-position="right"] {
   width: 100px;
 }
 

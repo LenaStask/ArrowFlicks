@@ -54,7 +54,7 @@
   height: 28px;
 }
 
-.average{
+.average {
   color: var(--mantine-color-grey-0);
   font-size: 16px;
 }
@@ -103,7 +103,7 @@
   color: var(--mantine-color-grey-2);
 }
 
-.modalTitle{
+.modalTitle {
   margin-top: 16px;
   font-weight: 700;
 }

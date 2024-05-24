@@ -17,7 +17,7 @@ const Navbar = () => {
   const pathname = usePathname();
 
   const [active, setActive] = useState(
-    pathname === "/" || pathname === "/ratedMovies" ? pathname : "/"
+    pathname === "/" || pathname === "/ratedMovies" ? pathname : "/",
   );
   const [opened, { toggle }] = useDisclosure(false);
 

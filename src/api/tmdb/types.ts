@@ -33,13 +33,13 @@ export interface Movie {
       logo_path: string;
       name: string;
       origin_country: string;
-    }
+    },
   ];
   production_countries: [
     {
       iso_3166_1: string;
       name: string;
-    }
+    },
   ];
   release_date: string;
   revenue: number;
@@ -49,7 +49,7 @@ export interface Movie {
       english_name: string;
       iso_639_1: string;
       name: string;
-    }
+    },
   ];
   status: string;
   tagline: string;
@@ -59,7 +59,7 @@ export interface Movie {
   vote_count: number;
   videos: {
     results: VideoListItem[];
-  }
+  };
 }
 
 export enum MovieListFilterNames {
@@ -71,7 +71,7 @@ export enum MovieListFilterNames {
 
 export type MovieListFilters = {
   [key in MovieListFilterNames]?: string;
-}
+};
 
 export interface MovieListItem {
   adult: boolean;

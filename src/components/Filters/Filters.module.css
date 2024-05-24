@@ -20,7 +20,7 @@
 .label {
   margin-bottom: 8px;
   color: var(--mantine-color-grey-0);
-  font-size: 16px; 
+  font-size: 16px;
   font-weight: 600;
 }
 
@@ -48,7 +48,7 @@
 .pillsList {
   min-height: 28px;
   & button {
-   display: none;
+    display: none;
   }
 }
 .pill {

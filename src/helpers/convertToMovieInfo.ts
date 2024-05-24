@@ -3,12 +3,12 @@ import MovieInfo from "@/types/MovieInfo";
 
 export default function convertToMovieInfo(
   movieListItems: MovieListItem[],
-  genres: Genre[]
+  genres: Genre[],
 ): MovieInfo[] {
   return movieListItems.map((movieListItem) => {
     return {
       genres: genres.filter((genre) =>
-        movieListItem.genre_ids.includes(genre.id)
+        movieListItem.genre_ids.includes(genre.id),
       ),
       id: movieListItem.id,
       original_title: movieListItem.original_title,

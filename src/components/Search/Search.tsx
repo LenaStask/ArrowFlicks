@@ -36,9 +36,7 @@ const Search = ({ onChange }: ChildProps) => {
           Search
         </Button>
       }
-      onKeyDown={getHotkeyHandler([
-        ["Enter", () => handleButtonClick(value)],
-      ])}
+      onKeyDown={getHotkeyHandler([["Enter", () => handleButtonClick(value)]])}
     />
   );
 };

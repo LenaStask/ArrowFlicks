@@ -16,7 +16,7 @@ const getRatedMovie = (id: number): RatedMovie | null => {
 
 const setRatedMovie = (movie: MovieInfo, value: number) => {
   const ratedMovies = getRatedMovies();
-  ratedMovies.push({movie: movie, rating: value});
+  ratedMovies.push({ movie: movie, rating: value });
 
   localStorage.setItem("ratedMovies", JSON.stringify(ratedMovies));
 };
@@ -24,7 +24,7 @@ const setRatedMovie = (movie: MovieInfo, value: number) => {
 const removeRatedMovie = (id: number) => {
   let ratedMovies = getRatedMovies();
 
-  ratedMovies = ratedMovies.filter((movie) => movie.movie.id !== id)
+  ratedMovies = ratedMovies.filter((movie) => movie.movie.id !== id);
 
   localStorage.setItem("ratedMovies", JSON.stringify(ratedMovies));
 };

@@ -11,7 +11,7 @@
   left: 24px;
 }
 
-.group{
+.group {
   display: flex;
   flex-direction: column;
   align-items: center;

@@ -4,7 +4,7 @@
   max-width: 800px;
   background-color: var(--mantine-color-grey-6);
   border-radius: 12px;
-  padding: 24px; 
+  padding: 24px;
   @media (max-width: 840px) {
     max-width: 600px;
   }
@@ -52,7 +52,7 @@
   font-weight: 600;
   margin: 0 0 8px 0;
   @media (max-width: 620px) {
-   text-align: center; 
+    text-align: center;
   }
 }
 
