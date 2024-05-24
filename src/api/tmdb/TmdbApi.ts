@@ -34,6 +34,12 @@ const getMovies = async (
       filters.primary_release_year.toString()
     );
   }
+  if (filters["vote_average.gte"]) {
+    searchParams.append("vote_average.gte", filters["vote_average.gte"]);
+  }
+  if (filters["vote_average.lte"]) {
+    searchParams.append("vote_average.lte", filters["vote_average.lte"]);
+  }
   searchParams.append("sort_by", sorting);
   searchParams.append("page", page.toString());
 

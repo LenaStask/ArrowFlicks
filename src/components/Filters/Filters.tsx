@@ -1,70 +1,150 @@
-import { Button, Flex, Group, MultiSelect, NumberInput } from "@mantine/core";
+import {
+  Button,
+  Flex,
+  Group,
+  MultiSelect,
+  NumberInput,
+  Select,
+} from "@mantine/core";
 import { useState } from "react";
 import classes from "./Filters.module.css";
-import { IconChevronDown } from "@tabler/icons-react";
-import { YearPickerInput } from "@mantine/dates";
-import { Genre, MovieListFilters } from "@/api/tmdb/types";
+import { IconChevronDown, IconChevronUp } from "@tabler/icons-react";
+import {
+  Genre,
+  MovieListFilterNames,
+  MovieListFilters,
+} from "@/api/tmdb/types";
 
 interface ChildProps {
   genres: Genre[];
-  onChange: (value: MovieListFilters) => void;
+  value: MovieListFilters;
+  onChange: (value: { [key in MovieListFilterNames]?: string }) => void;
 }
 
-const Filters = ({ onChange, genres }: ChildProps) => {
-  const comboboxData = genres.map((item: Genre) => ({
+const Filters = ({ genres, value, onChange }: ChildProps) => {
+  const genresData = genres.map((item: Genre) => ({
     value: item.id.toString(),
     label: item.name,
   }));
 
-  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
+  const yearsData: string[] = [];
+  for (let i = 2024; i >= 1800; i--) {
+    yearsData.push(i.toString());
+  }
 
-  const handleChangeGenres = (genres: string[]) => {
+  const [selectedGenres, setSelectedGenres] = useState<string[]>(
+    value.with_genres?.split(",") ?? []
+  );
+
+  const handleGenresChange = (genres: string[]) => {
     setSelectedGenres(genres);
-    triggerOnChange();
+    onChange({ [MovieListFilterNames.WithGenres]: genres.join(",") });
   };
 
-  const triggerOnChange = () => {
-    onChange({
-      with_genres: selectedGenres.join(","),
-    });
+  const [selectedYear, setSelectedYear] = useState<string | null>(
+    value.primary_release_year?.toString() ?? ""
+  );
+
+  const handleYearChange = (year: string | null) => {
+    year = year ?? "";
+
+    setSelectedYear(year);
+    onChange({ [MovieListFilterNames.PrimaryReleaseYear]: year });
   };
+
+  const [selectedRatingFrom, setSelectedRatingFrom] = useState<string>(
+    value["vote_average.gte"] ?? ""
+  );
+
+  const handleRatingFromChange = (rating: string | number) => {
+    rating = rating.toString();
+
+    setSelectedRatingFrom(rating);
+    onChange({ [MovieListFilterNames.VoteAverageGte]: rating });
+  };
+
+  const [selectedRatingTo, setSelectedRatingTo] = useState<string>(
+    value["vote_average.lte"] ?? ""
+  );
+
+  const handleRatingToChange = (rating: string | number) => {
+    rating = rating.toString();
+
+    setSelectedRatingTo(rating);
+    onChange({ [MovieListFilterNames.VoteAverageLte]: rating });
+  };
+
+  const handleReset = () => {
+    setSelectedGenres([]);
+    setSelectedYear(null);
+    setSelectedRatingFrom('');
+    setSelectedRatingTo('');
+    onChange({
+      
+    });
+  }
+
+  const [expandedGenres, setExpandedGenres] = useState(false);
+  const handleGenresDropdownOpen = () => setExpandedGenres(true);
+  const handleGenresDropdownClose = () => setExpandedGenres(false);
+
+  const [expandedYear, setExpandedYear] = useState(false);
+  const handleYearDropdownOpen = () => setExpandedYear(true);
+  const handleYearDropdownClose = () => setExpandedYear(false);
 
   return (
     <Flex className={classes.container}>
       <MultiSelect
         classNames={{
           input: classes.input,
-          label: classes.label
+          label: classes.label,
         }}
         label="Genres"
-        data={comboboxData}
+        data={genresData}
         value={selectedGenres}
+        onChange={(_value) => {
+          handleGenresChange(_value);
+        }}
         placeholder="Select genre"
-        rightSection={
-          <IconChevronDown
-            stroke={1.5}
-            size={24}
-            className={classes.selectIcon}
-          />
-        }
-        onChange={handleChangeGenres}
         withCheckIcon={false}
         clearable={true}
+        rightSection={
+          expandedGenres ? (
+            <IconChevronUp stroke={1.5} size={24} className={classes.iconUp} />
+          ) : (
+            <IconChevronDown
+              stroke={1.5}
+              size={24}
+              className={classes.iconDown}
+            />
+          )
+        }
+        onDropdownOpen={handleGenresDropdownOpen}
+        onDropdownClose={handleGenresDropdownClose}
       />
-      <YearPickerInput
+      <Select
+        data={yearsData}
+        value={selectedYear}
+        onChange={handleYearChange}
+        placeholder="Select release year"
+        label="Release year"
         classNames={{
           input: classes.input,
           label: classes.label,
-          }}
-        placeholder="Select release year"
-        label="Release year"
+        }}
         rightSection={
-          <IconChevronDown
-            stroke={1.5}
-            size={24}
-            className={classes.selectIcon}
-          />
+          expandedYear ? (
+            <IconChevronUp stroke={1.5} size={24} className={classes.iconUp} />
+          ) : (
+            <IconChevronDown
+              stroke={1.5}
+              size={24}
+              className={classes.iconDown}
+            />
+          )
         }
+        onDropdownOpen={handleYearDropdownOpen}
+        onDropdownClose={handleYearDropdownClose}
       />
       <Group gap={8}>
         <NumberInput
@@ -74,6 +154,8 @@ const Filters = ({ onChange, genres }: ChildProps) => {
             control: classes.numberControl,
             label: classes.label,
           }}
+          value={selectedRatingFrom}
+          onChange={handleRatingFromChange}
           label="Ratings"
           placeholder="From"
           min={0}
@@ -85,16 +167,22 @@ const Filters = ({ onChange, genres }: ChildProps) => {
             input: classes.numberInput,
             section: classes.numberSection,
             control: classes.numberControl,
+            root: classes.numberRoot,
             label: classes.label,
           }}
+          value={selectedRatingTo}
+          onChange={handleRatingToChange}
           label=" "
           placeholder="To"
         />
       </Group>
-        <Button
-          variant="transparent"
-          className={classes.transporentButton}
-        >Reset filters</Button>
+      <Button 
+        variant="transparent"   
+        className={classes.transporentButton}
+        onClick={handleReset}
+        >
+        Reset filters
+      </Button>
     </Flex>
   );
 };

@@ -59,11 +59,15 @@ export interface Movie {
   vote_count: number;
 }
 
-export interface MovieListFilters {
-  with_genres?: string;
-  primary_release_year?: number;
-  "vote_average.gte"?: number;
-  "vote_average.lte"?: number;
+export enum MovieListFilterNames {
+  WithGenres = "with_genres",
+  PrimaryReleaseYear = "primary_release_year",
+  VoteAverageGte = "vote_average.gte",
+  VoteAverageLte = "vote_average.lte",
+}
+
+export type MovieListFilters = {
+  [key in MovieListFilterNames]?: string;
 }
 
 export interface MovieListItem {
