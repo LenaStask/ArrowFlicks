@@ -16,7 +16,7 @@ const Logo = () => {
           src={icon}
           alt="icon"
         />
-        <Title className={poppins.className} c="purple.1">
+        <Title order={2} className={poppins.className} c="purple.1">
           ArrowFlicks
         </Title>
       </Center>

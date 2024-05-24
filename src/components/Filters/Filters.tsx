@@ -5,6 +5,7 @@ import {
   MultiSelect,
   NumberInput,
   Select,
+  MultiSelectValueProps,
 } from "@mantine/core";
 import { useState } from "react";
 import classes from "./Filters.module.css";
@@ -105,8 +106,14 @@ const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
     <Flex className={classes.container}>
       <MultiSelect
         classNames={{
+          root: classes.root,
           input: classes.input,
           label: classes.label,
+          pillsList: classes.pillsList,
+          pill: classes.pill,
+          inputField: classes.inputField,
+          dropdown: classes.dropdown,
+          option: classes.option,
         }}
         label="Genres"
         data={genresData}
@@ -114,7 +121,7 @@ const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
         onChange={(_value) => {
           handleGenresChange(_value);
         }}
-        placeholder="Select genre"
+        placeholder={selectedGenres.length === 0 ? "Select genre" : ""}
         withCheckIcon={false}
         clearable={true}
         rightSection={
@@ -138,8 +145,11 @@ const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
         placeholder="Select release year"
         label="Release year"
         classNames={{
+          root: classes.root,
           input: classes.input,
           label: classes.label,
+          dropdown: classes.dropdown,
+          option: classes.option,
         }}
         rightSection={
           expandedYear ? (
@@ -158,6 +168,7 @@ const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
       <Group gap={8}>
         <NumberInput
           classNames={{
+            root: classes.numberRoot,
             input: classes.numberInput,
             section: classes.numberSection,
             control: classes.numberControl,
@@ -173,10 +184,10 @@ const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
         />
         <NumberInput
           classNames={{
+            root: classes.numberRoot,
             input: classes.numberInput,
             section: classes.numberSection,
             control: classes.numberControl,
-            root: classes.numberRoot,
             label: classes.label,
           }}
           value={selectedRatingTo}
@@ -187,7 +198,7 @@ const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
       </Group>
       <Button
         variant="transparent"
-        className={classes.transporentButton}
+        className={classes.transparentButton}
         disabled={isDisabled()}
         onClick={handleReset}
       >

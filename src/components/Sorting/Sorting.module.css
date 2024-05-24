@@ -3,6 +3,7 @@
   margin-bottom: 24px;
   @media (max-width: 1000px) {
     align-self: center;
+    width: 100%;
   }
 }
 
@@ -23,6 +24,9 @@
   }
   &[data-expanded] {
     border: 1px solid var(--mantine-color-purple-1);
+  }
+  @media (max-width: 1000px) {
+    width: 100%;
   }
 }
 

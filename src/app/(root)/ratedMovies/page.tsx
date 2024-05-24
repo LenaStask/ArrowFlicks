@@ -11,14 +11,13 @@ import {
   Group,
   Title,
   Flex,
-  Center,
-  Loader,
 } from "@mantine/core";
 import classes from "./page.module.css";
 import { useEffect, useState } from "react";
 import no_ratedMovies from "../../../assets/no_rated_movies.svg";
 import NextImage from "next/image";
 import Search from "@/components/Search/Search";
+import Loader from '@/components/Loader/Loader';
 
 export default function RatedMovies() {
   const [isLoading, setIsLoading] = useState(true);
@@ -53,11 +52,7 @@ export default function RatedMovies() {
   };
 
   if (isLoading) {
-    return (
-      <Center>
-        <Loader color="purple.1" size="xl" type="dots" />
-      </Center>
-    );
+    return <Loader></Loader>;
   }
 
   if (movies.length === 0) {
@@ -81,7 +76,7 @@ export default function RatedMovies() {
   return (
     <Flex direction={"column"}>
       <Group className={classes.search}>
-        <Title>Rated Movies</Title>
+        <Title order={1}>Rated Movies</Title>
         <Search onChange={handleSearchChange} />
       </Group>
       <MovieList

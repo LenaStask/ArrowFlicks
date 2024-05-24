@@ -30,7 +30,7 @@ select {
   margin: 0 auto;
   display: flex;
   flex-direction: row;
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     flex-direction: column;
   }
 }

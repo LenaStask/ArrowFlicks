@@ -8,7 +8,7 @@ export async function GET(request: Request, { params }: { params: { slug: string
   const urlParams = url.searchParams;
 
   urlParams.append('api_key', TMBD_API_KEY);
-  
+
   const response = await fetch(`${TMDB_API_URL}/${path}?${urlParams.toString()}`);
   const movies = await response.json()
 

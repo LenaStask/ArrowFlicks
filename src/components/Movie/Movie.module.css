@@ -1,11 +1,31 @@
 .card {
   flex-direction: row;
   justify-content: space-between;
-  max-height: 400px;
   max-width: 800px;
   background-color: var(--mantine-color-grey-6);
   border-radius: 12px;
   padding: 24px; 
+  @media (max-width: 840px) {
+    max-width: 600px;
+  }
+  @media (max-width: 620px) {
+    width: 300px;
+  }
+}
+.infoImageWrapper {
+  @media (max-width: 620px) {
+    flex-direction: column;
+  }
+}
+
+.imageRoot {
+  @media (max-width: 840px) {
+    width: 200px;
+  }
+  @media (max-width: 620px) {
+    width: 100px;
+    margin: 0 auto;
+  }
 }
 
 .header {
@@ -13,12 +33,27 @@
   flex-direction: column;
   justify-content: space-between;
   margin-left: 16px;
+  @media (max-width: 620px) {
+    margin-left: 0;
+  }
 }
+
+.mainInfo {
+  flex-direction: column;
+  @media (max-width: 620px) {
+    align-items: center;
+    margin-top: 10px;
+  }
+}
+
 .title {
   color: var(--mantine-color-purple-1);
   font-size: 20px;
   font-weight: 600;
   margin: 0 0 8px 0;
+  @media (max-width: 620px) {
+   text-align: center; 
+  }
 }
 
 .year {
@@ -28,14 +63,14 @@
 }
 
 .vote {
- display: flex;
- flex-direction: row;
- align-items: center;
- gap: 4px;
- height: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4px;
+  height: 28px;
 }
 
-.average{
+.average {
   color: var(--mantine-color-grey-0);
   font-size: 16px;
 }
@@ -45,10 +80,10 @@
   font-size: 16px;
 }
 
-.info {
+.extraInfo {
   flex-direction: column;
-  gap: 0;
   align-items: flex-start;
+  gap: 0;
 }
 
 .genres {
@@ -57,18 +92,13 @@
   color: var(--mantine-color-grey-1);
   & span {
     color: var(--mantine-color-grey-0);
+    @media (max-width: 620px) {
+      display: block;
+    }
   }
 }
 
 .label {
   display: inline-block;
   width: 140px;
-}
-
-.iconStar {
-  height: 28px;
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  gap: 6px;
 }

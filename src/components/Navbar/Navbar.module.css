@@ -3,7 +3,7 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     min-height: 50px;
     flex-direction: row;
     justify-content: space-between;
@@ -16,7 +16,7 @@
   flex-direction: column;
   gap: 16px;
   margin: 24px;
-  @media (max-width: 1200px) {
+  @media (max-width: 1300px) {
     flex-direction: row;
   }
   @media (max-width: 600px) {
@@ -46,7 +46,7 @@
 
 .burger {
   margin-right: 24px;
-  @media (min-width: 600px) {
+  @media (min-width: 601px) {
     display: none;
   }
 }

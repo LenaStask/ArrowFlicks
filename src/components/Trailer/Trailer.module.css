@@ -5,6 +5,12 @@
   border-radius: 12px;
   padding: 24px; 
   margin-bottom: 24px;
+  @media (max-width: 840px) {
+    max-width: 600px;
+  }
+  @media (max-width: 620px) {
+    width: 300px;
+  }
 }
 .section {
   flex-direction: column;
@@ -27,6 +33,9 @@
   border-radius: 9px;
   width: 500px;
   min-height: 281px;
+  @media (max-width: 620px) {
+    width: 255px;
+  }
 }
 
 .group {

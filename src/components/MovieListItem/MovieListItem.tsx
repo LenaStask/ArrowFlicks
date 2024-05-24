@@ -16,18 +16,18 @@ const MovieListItem = ({ movie }: { movie: MovieInfo }) => {
             src={no_poster}
             alt="poster"
             component={NextImage}
-            style={{ width: "119px", height: "auto" }}
+            className={classes.poster}
           />
         ) : (
           <Image
             src={"https://image.tmdb.org/t/p/w185" + movie.poster_path}
             alt="poster"
-            style={{ width: "119px", height: "auto" }}
+            className={classes.poster}
           />
         )}
         <Flex className={classes.info}>
           <Flex direction="column" className={classes.infoSection}>
-            <Title className={classes.cardTitle} order={2}>
+            <Title className={classes.cardTitle} order={3}>
               {movie.original_title}
             </Title>
             <Text className={classes.year}>

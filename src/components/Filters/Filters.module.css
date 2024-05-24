@@ -1,11 +1,19 @@
 .container {
   margin-bottom: 24px;
   flex-direction: row;
+  align-items: flex-start;
   justify-content: space-between;
-  gap:16px;
   @media (max-width: 1000px) {
-    flex-direction: column;
     align-items: center;
+    flex-direction: column;
+    margin-bottom: 0;
+  }
+}
+
+.root {
+  @media (max-width: 1000px) {
+    margin-bottom: 10px;
+    width: 100%;
   }
 }
 
@@ -20,19 +28,25 @@
   border-radius: 8px;
   border: 1px solid var(--mantine-color-grey-3);
   width: 283px;
-  height: 42px;
+  min-height: 42px;
+
   &:hover {
     border: 1px solid var(--mantine-color-purple-1);
   }
   &[data-expanded] {
     border: 1px solid var(--mantine-color-purple-1);
   }
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
 }
 
 .inputField {
-  display: none;
+  min-height: 28px;
 }
+
 .pillsList {
+  min-height: 28px;
   & button {
    display: none;
   }
@@ -40,6 +54,11 @@
 .pill {
   background-color: transparent;
   font-size: 14px;
+  padding-left: 0;
+
+  &:not(:nth-last-child(2))::after {
+    content: ",";
+  }
 }
 
 .iconUp {
@@ -60,18 +79,6 @@
     color: var(--mantine-color-grey-7);
   }
 }
-.inputYear {
-  border-radius: 8px;
-  border: 1px solid var(--mantine-color-grey-3);
-  width: 283px;
-  min-height: 42px;
-  &:hover {
-    border: 1px solid var(--mantine-color-purple-1);
-  }
-  &[aria-expanded="true"] {
-    border: 1px solid var(--mantine-color-purple-1);
-  }
-}
 
 .numberInput {
   border-radius: 8px;
@@ -83,6 +90,19 @@
   }
   &:focus {
     border: 1px solid var(--mantine-color-purple-1);
+  }
+  @media (max-width: 1000px) {
+    width: 100%;
+  }
+}
+
+.numberRoot {
+  align-self: flex-end;
+  @media (max-width: 1000px) {
+    width: 286px;
+  }
+  @media (max-width: 600px) {
+    width: 146px;
   }
 }
 
@@ -97,14 +117,11 @@
   &:active {
     color: var(--mantine-color-purple-1);
   }
-} 
-.numberRoot {
-  align-self: flex-end;
 }
 
-.transporentButton {
-  align-self: flex-end;
-  margin-bottom: 3px;
+.transparentButton {
+  align-self: flex-start;
+  margin-top: 35px;
   padding: 0;
   color: var(--mantine-color-purple-1);
   font-weight: 500;
@@ -120,5 +137,6 @@
   }
   @media (max-width: 1000px) {
     align-self: center;
+    margin-top: 5px;
   }
 }

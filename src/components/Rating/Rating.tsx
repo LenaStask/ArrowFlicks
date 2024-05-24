@@ -22,21 +22,29 @@ const Rating = ({ movie }: { movie: MovieInfo }) => {
 
   const [opened, { open, close }] = useDisclosure(false);
   const [value, setValue] = useState(ratedMovie ? ratedMovie.rating : 0);
+  const [newValue, setNewValue] = useState(value);
 
   return (
     <Flex className={classes.iconStar}>
       <Modal
         classNames={classes}
         opened={opened}
-        onClose={close}
+        onClose={() => {
+          setNewValue(value);
+          close();
+        }}
         title="Your rating"
         centered
       >
-        <Flex direction={"column"} gap={16}>
+        <Flex direction={"column"} gap={13}>
           <Text className={classes.modalTitle}>{movie.original_title}</Text>
           <MantineRating
-            value={value}
-            onChange={setValue}
+            classNames={{
+              root: classes.ratingRoot,
+              symbolGroup: classes.ratingSymbolGroup,
+            }}
+            value={newValue}
+            onChange={setNewValue}
             count={10}
             size={"lg"}
           />
@@ -44,7 +52,8 @@ const Rating = ({ movie }: { movie: MovieInfo }) => {
             <Button
               className={classes.fillButton}
               onClick={() => {
-                setRatedMovie(movie, value);
+                setRatedMovie(movie, newValue);
+                setValue(newValue);
                 close();
               }}
             >
@@ -52,7 +61,7 @@ const Rating = ({ movie }: { movie: MovieInfo }) => {
             </Button>
             <Button
               variant="transparent"
-              className={classes.transporentButton}
+              className={classes.transparentButton}
               onClick={() => {
                 removeRatedMovie(movie.id);
                 setValue(0);

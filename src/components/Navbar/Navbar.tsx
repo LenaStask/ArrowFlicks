@@ -5,7 +5,8 @@ import { Logo } from "../Logo/Logo";
 import classes from "./Navbar.module.css";
 import { useState } from "react";
 import { useDisclosure } from "@mantine/hooks";
-import Link from 'next/link';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const data = [
   { link: "/", label: "Movies" },
@@ -13,24 +14,27 @@ const data = [
 ];
 
 const Navbar = () => {
-  const [active, setActive] = useState("Movies");
+  const pathname = usePathname();
+
+  const [active, setActive] = useState(
+    pathname === "/" || pathname === "/ratedMovies" ? pathname : "/"
+  );
   const [opened, { toggle }] = useDisclosure(false);
 
   const links = data.map((item) => (
-    <Button 
+    <Button
       classNames={{
-        root: classes.buttonroot
+        root: classes.buttonroot,
       }}
-      justify={'flex-start'}
-      key={item.label} 
-      component={Link} 
-      href={item.link} 
-      data-active={item.label === active ? 'true' : undefined}
-      onClick={() =>  setActive(item.label)}
+      justify={"flex-start"}
+      key={item.label}
+      component={Link}
+      href={item.link}
+      data-active={item.link === active ? "true" : undefined}
+      onClick={() => setActive(item.link)}
     >
       {item.label}
     </Button>
-
   ));
 
   return (

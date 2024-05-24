@@ -6,13 +6,15 @@
   gap: 6px;
 }
 
-.modal {
+.content {
   max-width: 380px;
   max-height: 208px;
-  padding: 16px;
   border-radius: 8px;
   & .title {
     color: black;
+  }
+  @media (max-width: 600px) {
+    max-width: 300px;
   }
 }
 
@@ -22,16 +24,35 @@
 
 .header {
   font-weight: 200;
+  font-size: 16px;
   border-bottom: 1px solid var(--mantine-color-grey-3);
 }
 
 .close {
   color: var(--mantine-color-grey-2);
+  background-color: transparent;
+  &:hover {
+    color: var(--mantine-color-purple-2);
+    background-color: transparent;
+  }
+  &:active {
+    color: var(--mantine-color-purple-0);
+  }
 }
 
 .modalTitle{
   margin-top: 16px;
   font-weight: 700;
+  font-size: 16px;
+}
+
+.ratingRoot {
+  justify-content: space-between;
+  align-self: stretch;
+}
+
+.ratingSymbolGroup {
+  margin: 0 3px;
 }
 
 .fillButton {
@@ -45,7 +66,7 @@
   }
 }
 
-.transporentButton {
+.transparentButton {
   color: var(--mantine-color-purple-1);
   &:hover {
     color: var(--mantine-color-purple-2);

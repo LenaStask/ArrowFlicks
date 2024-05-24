@@ -2,7 +2,7 @@
 
 import { getGenres, getMovies } from "../../api/tmdb/TmdbApi";
 import MovieList from "@/components/MovieList/MovieList";
-import { Center, Text, Loader, Pagination, Image, Flex } from "@mantine/core";
+import { Center, Text, Pagination, Image, Title } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import classes from "./page.module.css";
@@ -12,6 +12,7 @@ import convertToMovieInfo from "@/helpers/convertToMovieInfo";
 import { MovieListFilterNames, MovieListFilters } from "@/api/tmdb/types";
 import no_movies from "../../assets/no_movies.svg";
 import NextImage from "next/image";
+import Loader from "@/components/Loader/Loader";
 
 const MAX_TOTAL_PAGES = 500;
 
@@ -44,21 +45,14 @@ export default function Home() {
     setFilters({});
   };
 
-  if (genresQuery.isError || moviesQuery.isError) {
-    return <div>{genresQuery.error?.message}</div>;
+  if (genresQuery.isLoading) {
+    return <Loader></Loader>;
   }
 
-  if (genresQuery.isLoading || moviesQuery.isLoading) {
-    return (
-      <Center>
-        <Loader color="purple.1" size="xl" type="dots" />
-      </Center>
-    );
-  }
-
-  if (genresQuery.isSuccess && moviesQuery.isSuccess) {
+  if (genresQuery.isSuccess) {
     return (
       <div className={classes.container}>
+        <Title className={classes.title} order={1}>Movies</Title>
         <Filters
           genres={genresQuery.data.genres}
           value={filters}
@@ -66,34 +60,56 @@ export default function Home() {
           onReset={handleFiltersReset}
         />
         <Sorting value={sorting} onChange={handleSortingChange} />
-        {moviesQuery.data.results.length === 0 ? (
-          <Center classNames={{ root: classes.centerRoot }}>
-            <Image
-              classNames={{ root: classes.imageRoot }}
-              src={no_movies}
-              alt="No movies image"
-              component={NextImage}
-            ></Image>
-            <Text>We don&apos;t have such movies, look for another one</Text>
-          </Center>
+        {moviesQuery.isLoading ? <Loader></Loader> : ""}
+        {moviesQuery.isSuccess ? (
+          moviesQuery.data.results.length === 0 ? (
+            <Center classNames={{ root: classes.centerRoot }}>
+              <Image
+                classNames={{ root: classes.imageRoot }}
+                src={no_movies}
+                alt="No movies image"
+                component={NextImage}
+              ></Image>
+              <Text>We don&apos;t have such movies, look for another one</Text>
+            </Center>
+          ) : (
+            <>
+              <MovieList
+                movies={convertToMovieInfo(
+                  moviesQuery.data.results,
+                  genresQuery.data.genres
+                )}
+              />
+              <Pagination
+                classNames={classes}
+                value={activePage}
+                onChange={setPage}
+                total={Math.min(moviesQuery.data.total_pages, MAX_TOTAL_PAGES)}
+                color="purple.1"
+                boundaries={-1}
+              />
+            </>
+          )
         ) : (
-          <>
-            <MovieList
-              movies={convertToMovieInfo(
-                moviesQuery.data.results,
-                genresQuery.data.genres
-              )}
-            />
-            <Pagination
-              classNames={classes}
-              value={activePage}
-              onChange={setPage}
-              total={Math.min(moviesQuery.data.total_pages, MAX_TOTAL_PAGES)}
-              color="purple.1"
-              boundaries={-1}
-            />
-          </>
+          ""
         )}
+        {moviesQuery.isError ? (
+          <div>
+            {moviesQuery.error?.message ??
+              "An error occurred. Please try again later."}
+          </div>
+        ) : (
+          ""
+        )}
+      </div>
+    );
+  }
+
+  if (genresQuery.isError) {
+    return (
+      <div>
+        {genresQuery.error?.message ??
+          "An error occurred. Please try again later."}
       </div>
     );
   }
