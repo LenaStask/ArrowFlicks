@@ -18,7 +18,7 @@ const convertDate = (date: string): string => {
 const Movie = ({ movie }: { movie: IMovie }) => {
   return (
     <Card className={classes.card}>
-      <Flex className={classes.infoImageWrapper}>
+      <div className={classes.infoImageWrapper}>
         {movie.poster_path === null ? (
           <Image
             classNames={{
@@ -80,7 +80,7 @@ const Movie = ({ movie }: { movie: IMovie }) => {
             </div>
           </Group>
         </Flex>
-      </Flex>
+      </div>
       <Rating movie={movie} />
     </Card>
   );

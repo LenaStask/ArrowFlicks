@@ -6,6 +6,7 @@ import Movie from "@/components/Movie/Movie";
 import Trailer from "@/components/Trailer/Trailer";
 import classes from "./page.module.css";
 import { Center, Loader, Text } from "@mantine/core";
+import Link from 'next/link';
 
 export default function MovieDetails({
   params,
@@ -29,7 +30,7 @@ export default function MovieDetails({
     return (
       <div className={classes.container}>
         <div className={classes.path}>
-          <span>Movies</span> / <span>{data.title}</span>
+          <Link className={classes.link} href={'/'}>Movies</Link> / <span>{data.title}</span>
         </div>
         <Movie movie={data} />
         <Trailer movie={data} />

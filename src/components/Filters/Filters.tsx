@@ -173,7 +173,7 @@ const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
             control: classes.numberControl,
             label: classes.label,
           }}
-          value={selectedRatingFrom}
+          value={Number(selectedRatingFrom)}
           onChange={handleRatingFromChange}
           label="Ratings"
           placeholder="From"
@@ -189,10 +189,13 @@ const Filters = ({ genres, value, onChange, onReset }: ChildProps) => {
             control: classes.numberControl,
             label: classes.label,
           }}
-          value={selectedRatingTo}
+          value={Number(selectedRatingTo)}
           onChange={handleRatingToChange}
           label=" "
           placeholder="To"
+          min={0}
+          max={10}
+          step={1}
         />
       </Group>
       <Button

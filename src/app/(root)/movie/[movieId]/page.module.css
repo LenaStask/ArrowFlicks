@@ -15,3 +15,10 @@
     line-height: 20px;
   }
 }
+
+.link {
+  text-decoration: none;
+  color: var(--mantine-color-purple-1);
+  font-size: 14px;
+  line-height: 20px;
+}

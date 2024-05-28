@@ -13,6 +13,8 @@
   }
 }
 .infoImageWrapper {
+  display: flex;
+  flex-direction: row;
   @media (max-width: 620px) {
     flex-direction: column;
   }
